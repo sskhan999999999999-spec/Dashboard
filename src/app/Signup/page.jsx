@@ -1,16 +1,15 @@
 "use client"
+import Link from 'next/link'
 import React, { useState } from 'react'
 
-function page() {
+function Signup() {
     const [checkbox,setCheckbox] = useState(false)
-
-
 
   return (
     <div className=' min-h-screen grid place-items-center bg-gray-100 '>
       <div className='bg-white rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5 '>
         <div>
-            <h1 className='sm:text-3xl  text-2xl font-bold  text-orange-400 text-center '>Dashboard</h1>
+            <h1 className='sm:text-3xl  text-2xl font-bold  text-orange-400 text-center   '>Dashboard</h1>
             <h3 className='text-lg font-semibold text-center'>Create Your Business Account</h3>
             <h4 className='text-center'>Sing up to post events and manage your profile</h4>
            <div className='mt-2'>
@@ -38,7 +37,7 @@ function page() {
                 <span className='w-full border h-0 border-black/30'></span>
               </div>
               <div className='text-center'>
-                <p className='text-sm'>Already have an account?<span className='text-orange-600'>Sing up</span></p>
+                <Link href="/Login" className='text-sm'>Already have an account ? <span className='text-orange-600'> Login </span></Link>
               </div>
         </div>
         
@@ -47,4 +46,4 @@ function page() {
   )
 }
 
-export default page
+export default Signup
