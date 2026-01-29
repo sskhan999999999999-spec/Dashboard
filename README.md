@@ -1,2 +1,2 @@
-# Dashboard
-simple dashbaord app 
+#
+this is simple dashboard app
