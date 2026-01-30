@@ -1,6 +1,8 @@
 "use client";
 import { Eye, EyeClosed, EyeOff, LogIn } from 'lucide-react';
+import Link from 'next/link';
 import { useState } from 'react'
+
 
 
 function Login() {
@@ -55,9 +57,10 @@ function Login() {
 
                 <div className='flex items-center justify-center gap-1'>
                     <p className='text-[14px] tracking-wide font-normal text-[#96979E]'>Don't have an account?</p>
+                    
                     <button
                         className='text-orange-500 hover:text-orange-600 cursor-pointer font-medium text-[14px]'
-                    > Sign up</button>
+                    > <Link href="/Singup">Sign up</Link> </button>
                 </div>
 
             </div>
