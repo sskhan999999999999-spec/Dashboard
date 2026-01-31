@@ -41,7 +41,7 @@ function Login() {
                     Dashboard
                 </h1>
                 <h3 className='text-2xl tracking-wide font-medium pb-3'>
-                    Sign In to your account
+                    Sign In to your account !
                 </h3>
 
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
