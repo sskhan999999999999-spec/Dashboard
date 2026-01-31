@@ -9,7 +9,7 @@ function Login() {
     const [showPassw, setShowPassw] = useState(false)
 
     return (
-        <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
+        <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
 
             <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-3 justify-center'>
 
@@ -46,7 +46,7 @@ function Login() {
                 </div>
 
                 <button
-                    className='bg-linear-to-r from-orange-400 to-orange-600 hover:bg-linear-to-r hover:from-orange-500 hover:to-orange-800 font-medium w-full p-2 cursor-pointer text-white rounded-lg'
+                    className='bg-linear-to-r from-orange-400 to-orange-600 font-medium w-full p-2 cursor-pointer text-white rounded-lg'
                 >Sign in</button>
 
                  <div className='flex  items-center gap-1 mt-2'>
