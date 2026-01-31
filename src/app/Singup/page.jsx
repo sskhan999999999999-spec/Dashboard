@@ -67,7 +67,7 @@ function page() {
 
   return (
     <div className=' min-h-screen grid place-items-center bg-gray-100 p-2 '>
-      <div  className='bg-white rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5 '>
+      <div  className='bg-[#ffffff] rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5 '>
         <Toaster/>
         <form onSubmit={handleSubmit}>
             <h1 className='sm:text-3xl  text-2xl font-bold  text-orange-400 text-center '>Dashboard</h1>
@@ -92,7 +92,7 @@ function page() {
               <div className='flex gap-1 mt-2'>
                 <input type="checkbox" value={checkbox} onClick={()=> setCheckbox(!checkbox)} />
                 
-                <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>Privacy Policy</span></p>
+                <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'> <Link href="/Privacy" target='_blank'>Privacy Policy</Link> </span></p>
               </div>
               <div onClick={handleSubmit} className={checkbox?'bg-linear-to-r from-orange-400 to-orange-600 text-center text-white p-1 py-1.5 rounded-lg mt-2 ': "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}> 
                 <button type='submit' >Sing up</button>
