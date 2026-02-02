@@ -3,6 +3,9 @@ import { Eye,EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { redirect, useRouter } from 'next/navigation';
 import { useState } from 'react'
+import { useAuthStore } from '../store/store';
+import { Toaster,toast } from 'react-hot-toast';
+
 
 
 
@@ -29,12 +32,15 @@ function Login() {
 
         signIn()
         toast.success("Signing in....")
-        router.push("/Dashboard")
+        setTimeout(() => {
+           router.push("/Dashboard") 
+        }, 3000);
+        
     }
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
-            <Toaster position="top-center" />
+            <Toaster/>
 
             <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-2 justify-center'>
                 <h1 className='text-4xl tracking-wide text-orange-400 text-center font-bold'>
@@ -95,4 +101,5 @@ function Login() {
     );
 }
 
-export default Login
+
+export default Login;
