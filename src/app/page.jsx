@@ -1,22 +1,23 @@
 "use client"
 import Image from "next/image";
 import Login from "./Login/page";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
+import UserStore from "./store/Userstore";
 
 
 export default function Home() {
-
-       useEffect(()=>{
-         const formData = localStorage.getItem("formdata")
-           if(formData){
-               JSON.parse(formData)
-              redirect("/Dashboard")                         
-            }else{
-             redirect("/Login")
-            }
+      const {user} = UserStore()
+      const router = useRouter()
+       
+       if(user){
+       redirect("/Dashboard")
+       }else{
+        redirect("/Login")
+       }
+          
             
-       },[])
+       
       
       
        return (

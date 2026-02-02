@@ -1,20 +1,19 @@
 "use client"
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
+import UserStore from '../store/Userstore'
 
 function page() {
-   const [data,setData] = useState()
-   const router = useRouter()
-
-   useEffect(()=>{
-    const savedUser = localStorage.getItem("formdata")
-    if (savedUser)  setData(JSON.parse(savedUser))
-   },[])
    
-  function handleLogout (){
-    localStorage.clear()
-    router.push("/")
-  }
+  const {logout} = UserStore()
+  const router = useRouter()
+
+   function handleLogout (){
+    logout()
+    redirect("/Login")
+   }
+   
+  
    
   return (
     <div>

@@ -1,6 +1,7 @@
 "use client";
-import { Eye, EyeClosed, EyeOff, LogIn } from 'lucide-react';
+import { Eye,EyeOff } from 'lucide-react';
 import Link from 'next/link';
+import { redirect, useRouter } from 'next/navigation';
 import { useState } from 'react'
 
 
@@ -8,10 +9,12 @@ import { useState } from 'react'
 function Login() {
     const [showPassw, setShowPassw] = useState(false)
 
+    
+        const router = useRouter()
     return (
         <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
 
-            <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-3 justify-center'>
+            <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-3 justify-center '>
 
                 <h1 className='text-4xl tracking-wide text-orange-400 text-center font-bold'>Dashboard</h1>
                 <h3 className='text-2xl tracking-wide font-medium pb-3'>Sign in to your account</h3>
@@ -60,7 +63,7 @@ function Login() {
                     
                     <button
                         className='text-orange-500 hover:text-orange-600 cursor-pointer font-medium text-[14px]'
-                    > <Link href="/Singup">Sign up</Link> </button>
+                  onClick={()=>redirect("/Singup")}  > Sign up </button>
                 </div>
 
             </div>
