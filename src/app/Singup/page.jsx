@@ -1,11 +1,12 @@
 "use client"
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link'
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react'
+import { redirect, useRouter } from 'next/navigation';
+import React, {  useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
+import UserStore from '../store/Userstore';
+
 
 
 
@@ -46,6 +47,47 @@ function page() {
     }
 
   }
+    const [checkbox,setCheckbox] = useState(false)
+    const [hidePass,setHidePass] = useState(false)
+   
+     const {user,login} = UserStore()
+     
+    
+    const router = useRouter()
+    
+    function handleChange(e){
+    const {name,value} = e.target
+    login({...user,[name]:value})
+    }
+     
+    function handleSubmit (e){
+      e.preventDefault()
+      
+      if (!user.businessName || !user.email || !user.password){
+          toast.error("Please fill all inputs field")
+          return
+      }
+      else if(!checkbox ){
+        toast.error("Please accept Terms and Conditions")
+        return
+      } else if(user.businessName && user.email && user.password){
+        toast.success("Sing up Successfully!")
+       setTimeout(() => {
+         redirect("/Dashboard")
+       }, 2000); 
+      
+      }
+      
+    }
+
+    useEffect(()=>{
+
+      if(!login){
+        redirect("/Dashboard")
+      }
+    },[user])
+  
+
 
   useEffect(() => {
     const data = localStorage.getItem("formdata")
@@ -59,6 +101,8 @@ function page() {
     <div className=' min-h-screen grid place-items-center bg-gray-100 p-2 '>
       <div className='bg-[#ffffff] rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5 '>
         <Toaster />
+      <div  className='bg-[#ffffff] rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5  '>
+        <Toaster/>
         <form onSubmit={handleSubmit}>
           <h1 className='sm:text-3xl  text-2xl font-bold  text-orange-400 text-center '>Dashboard</h1>
           <h3 className='text-lg font-semibold text-center'>Create Your Business Account</h3>
@@ -74,6 +118,15 @@ function page() {
           <div className='mt-2 relative'>
             <label htmlFor="" className='text-sm '>Password <span className='text-orange-500'>*</span></label>
             <input value={formData.password} onChange={handlechange} name='password' required type={hidePass ? "text" : "password"} className='w-full relative p-1 px-2
+            <input required value={user.businessName} name='businessName' onChange={handleChange} type="text" className='w-full p-1 px-2 bg-transparent border border-black/30  rounded-lg text-md outline-orange-400  ' placeholder='Business name' />
+            </div> 
+           <div className='mt-2'>
+            <label htmlFor="" className='text-sm '>Email <span className='text-orange-500'>*</span></label>
+            <input value={user.email} onChange={handleChange} name='email' required type="email" className='w-full p-1 px-2 bg-transparent  border border-black/30 outline-orange-400 rounded-lg text-md ' placeholder='Email' />
+            </div> 
+           <div className='mt-2 relative'>
+            <label htmlFor="" className='text-sm '>Password <span className='text-orange-500'>*</span></label>
+            <input  value={user.password} onChange={handleChange} name='password' required type={hidePass?"text":"password"} className='w-full relative p-1 px-2
              bg-transparent  outline-orange-400 border border-black/30 rounded-lg text-md ' placeholder='Password' />
             <span className='absolute top-7 right-4 ' onClick={() => setHidePass(!hidePass)}>
               {hidePass ? <EyeOff /> : <Eye />}
