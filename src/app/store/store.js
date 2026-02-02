@@ -20,6 +20,9 @@ export const useAuthStore = create(
         password: "",
         isLogin: false,
       }),
-  })),
+  }),
+  {
+    name: "login-store",
+  }
+  )
 );
-
