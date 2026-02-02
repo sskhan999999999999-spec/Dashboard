@@ -27,9 +27,9 @@ function Login() {
             return;
         }
 
-        signIn()
-        toast.success("Signing in....")
-        router.push("/Dashboard")
+        signIn();
+        toast.success("Signing in....");
+        router.push("/Dashboard");
     }
 
     return (
@@ -86,7 +86,7 @@ function Login() {
 
                 <p className="text-sm text-center text-gray-500">
                     Don’t have an account?
-                    <Link href="/Singup" className="text-orange-500 ml-1 font-medium">
+                    <Link href="/Singup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
                         Sign up
                     </Link>
                 </p>
