@@ -1,33 +1,28 @@
-import { create } from "zustand"
-import {persist} from 'zustand/middleware'
+import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
-
-const  UserStore = create (
+const UserStore = create(
   persist(
-     (set)=>({
+    (set) => ({
+      user: null,
+      hydrated: false,
+      hasAccount:false,
 
-     user:{
-        businessName : "shahsawar",
-        email:"email.com",
-        password:""
-     }   ,
-     login: (data)=>{
-         set({
-            user:{
-               ...data
-            }
-         })
+      login: (data) => set({ user: data }),
+      signup: (data) => set({ user: {...data} }),
+      logout: () => set({ user: null }
+           
+      ),
 
-     },
-     logout:()=>{
-         set({user:{businessName:"",email:"",password:""}})
-     }
-      
-
-     }),
-     {
-      name:"Singup-Store"
-     }
+      setHydrated: () => set({ hydrated: true }),
+    }),
+    {
+      name: "user-store",
+      onRehydrateStorage: () => (state) => {
+        state.setHydrated();
+      },
+    }
   )
-)
-export default UserStore
+);
+
+export default UserStore;
