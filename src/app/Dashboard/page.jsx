@@ -2,18 +2,16 @@
 import { redirect, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/Sidebar'
-
-
 import UserStore from '../store/Userstore'
 
 function page() {
    
-  const {logout} = UserStore()
+  const logout = UserStore((state)=>state.logout)
   const router = useRouter()
 
    function handleLogout (){
     logout()
-    redirect("/Login")
+    router.push("/Login")
    }
    
   
@@ -21,6 +19,7 @@ function page() {
   return (
     <div>
       dashboard
+      <button onClick={handleLogout}>Logout</button>
     </div>
 
   )

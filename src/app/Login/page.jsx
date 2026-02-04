@@ -1,42 +1,50 @@
 "use client";
-import { Eye,EyeOff } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
-import { redirect, useRouter } from 'next/navigation';
-import { useState } from 'react'
-import { useAuthStore } from '../store/store';
-import { Toaster,toast } from 'react-hot-toast';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { Toaster, toast } from 'react-hot-toast';
+import UserStore from '../store/Userstore';
+import { shallow } from 'zustand/shallow';
+import Singup from '../components/SingupUser';
+import SingupUser from '../components/SingupUser';
 
-
-
+export function PreventUserLogin (user,router){
+    if(user){
+        router.replace("/Dashboard")
+    }
+}
 
 function Login() {
+    const router = useRouter()
+    const user = UserStore((state)=>state.user)
+    const [showPassw,setShowPassw] = useState(false)
+    const [formData,setFormData] = useState({
+        businessName:"",
+        email:"",
+        password:""
+    }) 
+    
 
-    const router = useRouter();
-    const [showPassw, setShowPassw] = useState(false)
-
-    const {
-        email,
-        password,
-        setEmail,
-        setPassword,
-        signIn,
-    } = useAuthStore();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!email || !password) {
-            toast.error("Please fill all the fields");
-            return;
-        }
-
-        signIn()
-        toast.success("Signing in....")
-        setTimeout(() => {
-           router.push("/Dashboard") 
-        }, 3000);
         
+    function handleChange(e){
+        const {name,value} = e.target
+        setFormData({...formData,[name]:value})
     }
+
+    function handleSubmit(e){
+        e.preventDefault();
+        toast.success("Sing in...")
+        SingupUser(formData)  
+        setTimeout(() => {
+            router.push("/Dashboard")
+        }, 2000);
+    }
+
+   
+    
+    
+
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
@@ -50,14 +58,29 @@ function Login() {
                     Sign In to your account !
                 </h3>
 
-                <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+                <form 
+                onSubmit={handleSubmit} 
+                className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-2'>
+                        <label className='text-[14px] font-medium'>Email</label>
+                        <input
+                            type="text"
+                            value={formData?.businessName || ""}
+                            required
+                            onChange={handleChange}
+                            name='businessName'
+                            className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
+                            placeholder="@gmail.com"
+                        />
+                    </div>
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
                         <input
                             type="email"
-                            value={email}
+                            value={formData?.email || ""}
                             required
-                            onChange={(e) => setEmail(e.target.value)}
+                            onChange={handleChange}
+                            name='email'
                             className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
                             placeholder="@gmail.com"
                         />
@@ -67,8 +90,9 @@ function Login() {
                         <label className='text-[14px] font-medium'>Password</label>
                         <input
                             type={showPassw ? "text" : "password"}
-                            value={password}
-                            onChange={(e) => setPassword(e.target.value)}
+                            value={formData?.password || ""}
+                            onChange={handleChange}
+                            name='password'
                             className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
                             placeholder="Enter your password"
                         />

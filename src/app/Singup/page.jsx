@@ -3,55 +3,54 @@ import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import toast from 'react-hot-toast';
-import { Toaster } from 'react-hot-toast';
+import { Toaster ,toast} from 'react-hot-toast';
 import UserStore from '../store/Userstore';
+import SingupUser from '../components/SingupUser';
 
 function page() {
 
+  const router = useRouter()
+  const user = UserStore((state)=>state.user)
   const [checkbox,setCheckbox] = useState(false)
   const [hidePass,setHidePass] = useState(false)
+  const [form,setForm] = useState({
+    businessName:"",
+    email:"",
+    password:""
+  })
 
-  const {user,login} = UserStore()
-  const router = useRouter()
+
 
   function handleChange(e){
     const {name,value} = e.target
-    login({...user,[name]:value})
+    setForm({...form,[name]:value})
   }
 
   function handleSubmit (e){
     e.preventDefault()
 
-    if (!user.businessName || !user.email || !user.password){
+    if (!form.businessName || !form.email || !form.password){
       toast.error("Please fill all inputs field")
       return
-    }
-    else if(!checkbox ){
+    }else if(!checkbox ){
       toast.error("Please accept Terms and Conditions")
       return
     }else{
-
-    toast.success("Sing up Successfully!")
-
-    setTimeout(() => {
-      router.push("/Dashboard")
-    }, 2000);
+        toast.success("Sing up Successfully!")
+          SingupUser(form)
+        setTimeout(() => {
+          router.push("/Dashboard")
+        }, 2000);
     }
   }
+ 
+  
 
   useEffect(()=>{
-    if(user?.email){
-      router.push("/Dashboard")
+    if(form.businessName != "" && form.email != "" && form.password !=""){
+     router.push("/Dashboard")
     }
-  },[user])
-
-  useEffect(() => {
-    const data = localStorage.getItem("formdata")
-    if (data) {
-      router.push("/Dashboard")
-    }
-  }, [])
+  },[router])
 
   return (
     <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
@@ -68,7 +67,7 @@ function page() {
             <label className='text-sm'>Buisness name *</label>
             <input
               required
-              value={user.businessName || ""}
+              value={form?.businessName || ""}
               name='businessName'
               onChange={handleChange}
               type="text"
@@ -81,7 +80,7 @@ function page() {
           <div className='mt-2'>
             <label className='text-sm'>Email *</label>
             <input
-              value={user.email || ""}
+              value={form?.email || ""}
               onChange={handleChange}
               name='email'
               required
@@ -91,11 +90,11 @@ function page() {
             />
           </div>
 
-          {/* Password */}
+          
           <div className='mt-2 relative'>
             <label className='text-sm'>Password *</label>
             <input
-              value={user.password || ""}
+              value={form?.password || ""}
               onChange={handleChange}
               name='password'
               required
