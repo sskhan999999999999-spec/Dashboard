@@ -1,8 +1,7 @@
 "use client"
-import Image from "next/image";
-import Login from "./Login/page";
 import { redirect } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import Login from "./auth/Login/page";
 
 
 export default function Home() {
@@ -11,9 +10,9 @@ export default function Home() {
          const formData = localStorage.getItem("formdata")
            if(formData){
                JSON.parse(formData)
-              redirect("/Dashboard")                         
+              redirect("/Dashboard/Home")           
             }else{
-             redirect("/Login")
+             redirect("/auth/Login")
             }
             
        },[])
@@ -21,7 +20,7 @@ export default function Home() {
       
        return (
         <div>
-
+          <Login/>
         </div>
        )
   

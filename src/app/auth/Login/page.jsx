@@ -1,7 +1,7 @@
 "use client";
 import { Eye, EyeOff } from "lucide-react";
 import { useState } from "react";
-import { useAuthStore } from "../store/store";
+import { useAuthStore } from "../../store/store";
 import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import Link from "next/link";
@@ -29,7 +29,7 @@ function Login() {
 
         signIn();
         toast.success("Signing in....");
-        router.push("/Dashboard");
+        router.push("/Dashboard/Home");
     }
 
     return (
@@ -86,7 +86,7 @@ function Login() {
 
                 <p className="text-sm text-center text-gray-500">
                     Don’t have an account?
-                    <Link href="/Singup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
+                    <Link href="/auth/Signup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
                         Sign up
                     </Link>
                 </p>

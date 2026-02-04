@@ -2,7 +2,7 @@ import React from 'react'
 
 function Createorder() {
   return (
-    <div>
+    <div className=''>
       Create order
     </div>
   )

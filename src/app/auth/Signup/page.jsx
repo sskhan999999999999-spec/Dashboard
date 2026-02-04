@@ -5,10 +5,6 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
-import { FaEye, FaEyeSlash } from "react-icons/fa";
-
-
-
 
 function page() {
   const [checkbox, setCheckbox] = useState(false)
@@ -40,7 +36,7 @@ function page() {
       toast.success("Sing up Successfully!")
       localStorage.setItem("formdata", JSON.stringify(formData))
       setTimeout(() => {
-        router.push("/Dashboard")
+        router.push("/Dashboard/Home")
       }, 2000);
 
     }
@@ -51,7 +47,7 @@ function page() {
     const data = localStorage.getItem("formdata")
     if (data) {
       JSON.parse(data)
-      router.push("/Dashboard")
+      router.push("/Dashboard/Home")
     }
   }, [])
 
@@ -82,10 +78,10 @@ function page() {
           <div className='flex gap-1 mt-2'>
             <input type="checkbox" value={checkbox} onClick={() => setCheckbox(!checkbox)} />
 
-            <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'> <Link href="/Privacy" target='_blank'>Privacy Policy</Link> </span></p>
+            <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/auth/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'> <Link href="/auth/Privacy" target='_blank'>Privacy Policy</Link> </span></p>
           </div>
           <div onClick={handleSubmit} className={checkbox ? 'bg-linear-to-r from-orange-400 to-orange-600 text-center text-white p-1 py-1.5 rounded-lg mt-2 ' : "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}>
-            <button type='submit' >Sing up</button>
+            <button type='submit' >Sign up</button>
           </div>
           <div className='flex  items-center gap-1 mt-2'>
             <span className='w-full border h-0 border-black/30'></span>
@@ -93,7 +89,7 @@ function page() {
             <span className='w-full border h-0 border-black/30'></span>
           </div>
           <div className='text-center'>
-            <p className='text-sm'>Already have an account? <span className='text-orange-600 cursor-pointer font-semibold'><Link href="/Login">Log in</Link> </span></p>
+            <p className='text-sm'>Already have an account? <span className='text-orange-600 cursor-pointer font-semibold'><Link href="/auth/Login">Log in</Link> </span></p>
           </div>
         </form>
 
