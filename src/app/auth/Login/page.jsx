@@ -1,4 +1,12 @@
 "use client";
+<<<<<<< HEAD:src/app/auth/Login/page.jsx
+import { Eye, EyeOff } from "lucide-react";
+import { useState } from "react";
+import { useAuthStore } from "../../store/store";
+import { useRouter } from "next/navigation";
+import toast, { Toaster } from "react-hot-toast";
+import Link from "next/link";
+=======
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -14,6 +22,7 @@ export function PreventUserLogin (user,router){
         router.replace("/Dashboard")
     }
 }
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
 
 function Login() {
     const router = useRouter()
@@ -26,10 +35,35 @@ function Login() {
     }) 
     
 
+<<<<<<< HEAD:src/app/auth/Login/page.jsx
+    const router = useRouter();
+    const [showPassw, setShowPassw] = useState(false)
+
+    const {
+        email,
+        password,
+        setEmail,
+        setPassword,
+        signIn,
+    } = useAuthStore();
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (!email || !password) {
+            toast.error("Please fill all the fields");
+            return;
+        }
+
+        signIn();
+        toast.success("Signing in....");
+        router.push("/Dashboard/Home");
+=======
         
     function handleChange(e){
         const {name,value} = e.target
         setFormData({...formData,[name]:value})
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
     }
 
     function handleSubmit(e){
@@ -116,7 +150,7 @@ function Login() {
 
                 <p className="text-sm text-center text-gray-500">
                     Don’t have an account?
-                    <Link href="/Singup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
+                    <Link href="/auth/Signup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
                         Sign up
                     </Link>
                 </p>
