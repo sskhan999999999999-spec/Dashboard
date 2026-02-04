@@ -3,35 +3,44 @@ import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
+<<<<<<< HEAD:src/app/auth/Signup/page.jsx
 import toast from 'react-hot-toast';
 import { Toaster } from 'react-hot-toast';
+=======
+import { Toaster ,toast} from 'react-hot-toast';
+import UserStore from '../store/Userstore';
+import SingupUser from '../components/SingupUser';
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
 
 function page() {
-  const [checkbox, setCheckbox] = useState(false)
-  const [hidePass, setHidePass] = useState(false)
-  const [formData, setFormData] = useState({
-    buisnessName: '',
-    email: "",
-    password: ''
 
-  })
   const router = useRouter()
+  const user = UserStore((state)=>state.user)
+  const [checkbox,setCheckbox] = useState(false)
+  const [hidePass,setHidePass] = useState(false)
+  const [form,setForm] = useState({
+    businessName:"",
+    email:"",
+    password:""
+  })
 
-  function handlechange(e) {
 
-    setFormData(prev => ({ ...prev, [e.target.name]: e.target.value }))
+
+  function handleChange(e){
+    const {name,value} = e.target
+    setForm({...form,[name]:value})
   }
 
-  function handleSubmit(e) {
+  function handleSubmit (e){
     e.preventDefault()
-    // window.alert("login")
-    if (!formData.buisnessName || !formData.email || !formData.password) {
+
+    if (!form.businessName || !form.email || !form.password){
       toast.error("Please fill all inputs field")
       return
-    }
-    else if (!checkbox) {
+    }else if(!checkbox ){
       toast.error("Please accept Terms and Conditions")
       return
+<<<<<<< HEAD:src/app/auth/Signup/page.jsx
     } else if (formData.buisnessName && formData.email && formData.password) {
       toast.success("Sing up Successfully!")
       localStorage.setItem("formdata", JSON.stringify(formData))
@@ -39,60 +48,142 @@ function page() {
         router.push("/Dashboard/Home")
       }, 2000);
 
+=======
+    }else{
+        toast.success("Sing up Successfully!")
+          SingupUser(form)
+        setTimeout(() => {
+          router.push("/Dashboard")
+        }, 2000);
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
     }
-
   }
+ 
+  
 
+<<<<<<< HEAD:src/app/auth/Signup/page.jsx
   useEffect(() => {
     const data = localStorage.getItem("formdata")
     if (data) {
       JSON.parse(data)
       router.push("/Dashboard/Home")
+=======
+  useEffect(()=>{
+    if(form.businessName != "" && form.email != "" && form.password !=""){
+     router.push("/Dashboard")
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
     }
-  }, [])
+  },[router])
 
   return (
-    <div className=' min-h-screen grid place-items-center bg-gray-100 p-2 '>
-      <div className='bg-[#ffffff] rounded-xl shadow-2xl  w-full max-w-md flex justify-center  p-4 pb-5 '>
-        <Toaster />
+    <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
+      <div className='bg-[#ffffff] rounded-xl shadow-2xl w-full max-w-md flex justify-center p-4 pb-5'>
+        <Toaster/>
+
         <form onSubmit={handleSubmit}>
-          <h1 className='sm:text-3xl  text-2xl font-bold  text-orange-400 text-center '>Dashboard</h1>
+          <h1 className='sm:text-3xl text-2xl font-bold text-orange-400 text-center'>Dashboard</h1>
           <h3 className='text-lg font-semibold text-center'>Create Your Business Account</h3>
           <h4 className='text-center'>Sing up to post events and manage your profile</h4>
+
+          {/* Business */}
           <div className='mt-2'>
-            <label htmlFor="" className='text-sm '>Buisness name <span className='text-orange-500'>*</span></label>
-            <input required value={formData.buisnessName} name='buisnessName' onChange={handlechange} type="text" className='w-full p-1 px-2 bg-transparent border border-black/30  rounded-lg text-md outline-orange-400  ' placeholder='Business name' />
+            <label className='text-sm'>Buisness name *</label>
+            <input
+              required
+              value={form?.businessName || ""}
+              name='businessName'
+              onChange={handleChange}
+              type="text"
+              className='w-full p-1 px-2 bg-transparent border border-black/30 rounded-lg outline-orange-400'
+              placeholder='Business name'
+            />
           </div>
+
+          {/* Email */}
           <div className='mt-2'>
-            <label htmlFor="" className='text-sm '>Email <span className='text-orange-500'>*</span></label>
-            <input value={formData.email} onChange={handlechange} name='email' required type="text" className='w-full p-1 px-2 bg-transparent  border border-black/30 outline-orange-400 rounded-lg text-md ' placeholder='Email' />
+            <label className='text-sm'>Email *</label>
+            <input
+              value={form?.email || ""}
+              onChange={handleChange}
+              name='email'
+              required
+              type="email"
+              className='w-full p-1 px-2 bg-transparent border border-black/30 outline-orange-400 rounded-lg'
+              placeholder='Email'
+            />
           </div>
+
+          
           <div className='mt-2 relative'>
-            <label htmlFor="" className='text-sm '>Password <span className='text-orange-500'>*</span></label>
-            <input value={formData.password} onChange={handlechange} name='password' required type={hidePass ? "text" : "password"} className='w-full relative p-1 px-2
-             bg-transparent  outline-orange-400 border border-black/30 rounded-lg text-md ' placeholder='Password' />
-            <span className='absolute top-7 right-4 ' onClick={() => setHidePass(!hidePass)}>
+            <label className='text-sm'>Password *</label>
+            <input
+              value={form?.password || ""}
+              onChange={handleChange}
+              name='password'
+              required
+              type={hidePass ? "text" : "password"}
+              className='w-full p-1 px-2 bg-transparent border border-black/30 rounded-lg outline-orange-400'
+              placeholder='Password'
+            />
+            <span className='absolute top-7 right-4' onClick={() => setHidePass(!hidePass)}>
               {hidePass ? <EyeOff /> : <Eye />}
             </span>
           </div>
-          <div className='flex gap-1 mt-2'>
-            <input type="checkbox" value={checkbox} onClick={() => setCheckbox(!checkbox)} />
 
+<<<<<<< HEAD:src/app/auth/Signup/page.jsx
             <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/auth/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'> <Link href="/auth/Privacy" target='_blank'>Privacy Policy</Link> </span></p>
           </div>
           <div onClick={handleSubmit} className={checkbox ? 'bg-linear-to-r from-orange-400 to-orange-600 text-center text-white p-1 py-1.5 rounded-lg mt-2 ' : "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}>
             <button type='submit' >Sign up</button>
+=======
+          {/* Checkbox */}
+          <div className='flex gap-1 mt-2'>
+            <input type="checkbox" checked={checkbox} onChange={() => setCheckbox(!checkbox)} />
+            <p className='text-sm'>
+              I agree to the
+              <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>
+                <Link href="/Terms" target='_blank'> Terms & conditions</Link>
+              </span>
+              and
+              <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>
+                <Link href="/Privacy" target='_blank'> Privacy Policy</Link>
+              </span>
+            </p>
           </div>
-          <div className='flex  items-center gap-1 mt-2'>
+
+          {/* Button */}
+          <div className={checkbox
+            ? 'bg-linear-to-r from-orange-400 to-orange-600 text-center text-white p-1 py-1.5 rounded-lg mt-2'
+            : "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}>
+
+            <button type='submit'>Sing up</button>
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
+          </div>
+
+          {/* OR */}
+          <div className='flex items-center gap-1 mt-2'>
             <span className='w-full border h-0 border-black/30'></span>
             <span>OR</span>
             <span className='w-full border h-0 border-black/30'></span>
           </div>
+<<<<<<< HEAD:src/app/auth/Signup/page.jsx
           <div className='text-center'>
             <p className='text-sm'>Already have an account? <span className='text-orange-600 cursor-pointer font-semibold'><Link href="/auth/Login">Log in</Link> </span></p>
           </div>
         </form>
+=======
+>>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
 
+          <div className='text-center'>
+            <p className='text-sm'>
+              Already have an account?
+              <span className='text-orange-600 cursor-pointer font-semibold'>
+                <Link href="/Login"> Log in</Link>
+              </span>
+            </p>
+          </div>
+
+        </form>
       </div>
     </div>
   )
