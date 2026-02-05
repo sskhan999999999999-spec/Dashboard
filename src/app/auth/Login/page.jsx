@@ -29,7 +29,7 @@ function Login() {
         setFormData({...formData,[name]:value})
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
         if(formData.password.length < 8){
             toast.error("Password at least 8 characters long.")
@@ -39,7 +39,7 @@ function Login() {
           SignupUser(formData)
         setTimeout(() => {
             router.replace("/Dashboard/Home")
-        }, 2000);
+        }, 3000);
     }
 
     useEffect(()=>{
@@ -48,7 +48,7 @@ function Login() {
         }else{
           router.replace("/auth/Login")
         }
-      },[])
+      },[user])
 
    
     
@@ -57,9 +57,9 @@ function Login() {
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
-            <Toaster/>
+            <Toaster />
 
-            <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-2 justify-center'>
+            <div className='shadow-2xl p-7 md:py-11 md:px-21 flex flex-col bg-[#FFFFFF] rounded-xl gap-2 justify-center'>
                 <h1 className='text-4xl tracking-wide text-orange-400 text-center font-bold'>
                     Dashboard
                 </h1>

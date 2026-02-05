@@ -61,7 +61,7 @@ function page() {
 
 
   return (
-    <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
+    <div className='min-h-screen grid place-items-center bg-white p-2'>
       <div className='bg-[#ffffff] rounded-xl shadow-2xl w-full max-w-md flex justify-center p-4 pb-5'>
         <Toaster/>
 
@@ -121,11 +121,11 @@ function page() {
             <p className='text-sm'>
               I agree to the
               <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>
-                <Link href="/Terms" target='_blank'> Terms & conditions</Link>
+                <Link href="/auth/Terms" target='_blank'> Terms & conditions</Link>
               </span>
               and
               <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>
-                <Link href="/Privacy" target='_blank'> Privacy Policy</Link>
+                <Link href="/auth/Privacy" target='_blank'> Privacy Policy</Link>
               </span>
             </p>
           </div>
@@ -147,20 +147,10 @@ function page() {
           <div className='text-center'>
             <p className='text-sm'>Already have an account? <span className='text-orange-600 cursor-pointer font-semibold'><Link href="/auth/Login">Log in</Link> </span></p>
           </div>
-       
-
-          {/* <div className='text-center'>
-            <p className='text-sm'>
-              Already have an account?
-              <span className='text-orange-600 cursor-pointer font-semibold'>
-                <Link href="/Login"> Log in</Link>
-              </span>
-            </p>
-          </div> */}
 
         </form>
       </div>
-    </div>
+  </div>
   )
 }
 
