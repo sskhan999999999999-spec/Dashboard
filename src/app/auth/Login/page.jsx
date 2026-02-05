@@ -1,90 +1,52 @@
 "use client";
-<<<<<<< HEAD:src/app/auth/Login/page.jsx
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
-import { useAuthStore } from "../../store/store";
-import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
-import Link from "next/link";
-=======
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import UserStore from '../store/Userstore';
-import { shallow } from 'zustand/shallow';
-import Singup from '../components/SingupUser';
-import SingupUser from '../components/SingupUser';
+import UserStore from '@/app/store/Userstore';
+import SingupUser from '@/app/components/SingupUser';
 
-export function PreventUserLogin (user,router){
-    if(user){
-        router.replace("/Dashboard")
+export function PreventUserLogin(user, router) {
+    if (user) {
+        router.replace("/Dashboard/Home")
     }
 }
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
 
 function Login() {
     const router = useRouter()
-    const user = UserStore((state)=>state.user)
-    const [showPassw,setShowPassw] = useState(false)
-    const [formData,setFormData] = useState({
-        businessName:"",
-        email:"",
-        password:""
-    }) 
-    
-
-<<<<<<< HEAD:src/app/auth/Login/page.jsx
-    const router = useRouter();
+    const user = UserStore((state) => state.user)
     const [showPassw, setShowPassw] = useState(false)
+    const [formData, setFormData] = useState({
+        businessName: "",
+        email: "",
+        password: ""
+    })
 
-    const {
-        email,
-        password,
-        setEmail,
-        setPassword,
-        signIn,
-    } = useAuthStore();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!email || !password) {
-            toast.error("Please fill all the fields");
-            return;
-        }
-
-        signIn();
-        toast.success("Signing in....");
-        router.push("/Dashboard/Home");
-=======
-        
-    function handleChange(e){
-        const {name,value} = e.target
-        setFormData({...formData,[name]:value})
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
+    function handleChange(e) {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
     }
 
-    function handleSubmit(e){
+    function handleSubmit(e) {
         e.preventDefault();
-        toast.success("Sing in...")
-        SingupUser(formData)  
+        if (formData?.email === "" || formData?.password === "") {
+            toast.error("Please fill the field's")
+            return
+        }
+        toast.success("Sign in...")
+        SingupUser(formData)
         setTimeout(() => {
-            router.push("/Dashboard")
+            router.push("/Dashboard/Home")
         }, 2000);
     }
 
-   
-    
-    
-
-
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
-            <Toaster/>
+            <Toaster />
 
-            <div className='shadow-2xl p-7 md:px-30 flex flex-col bg-[#FFFFFF] rounded-2xl gap-2 justify-center'>
+            <div className='shadow-2xl p-7 md:py-11 md:px-21 flex flex-col bg-[#FFFFFF] rounded-xl gap-2 justify-center'>
                 <h1 className='text-4xl tracking-wide text-orange-400 text-center font-bold'>
                     Dashboard
                 </h1>
@@ -92,25 +54,13 @@ function Login() {
                     Sign In to your account !
                 </h3>
 
-                <form 
-                onSubmit={handleSubmit} 
-                className='flex flex-col gap-2'>
+                <form
+                    onSubmit={handleSubmit}
+                    className='flex flex-col gap-2'>
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
                         <input
                             type="text"
-                            value={formData?.businessName || ""}
-                            required
-                            onChange={handleChange}
-                            name='businessName'
-                            className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
-                            placeholder="@gmail.com"
-                        />
-                    </div>
-                    <div className='flex flex-col gap-2'>
-                        <label className='text-[14px] font-medium'>Email</label>
-                        <input
-                            type="email"
                             value={formData?.email || ""}
                             required
                             onChange={handleChange}
