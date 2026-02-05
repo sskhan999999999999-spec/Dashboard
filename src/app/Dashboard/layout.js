@@ -1,7 +1,8 @@
-"use client"; // if using Next 13 App Router
 
-import SideBar from "../components/SideBar";
+
+
 import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
 
 export default function PageLayout({ children }) {
   return (
@@ -14,7 +15,7 @@ export default function PageLayout({ children }) {
       {/* Sidebar + Main Content */}
       <div className="flex flex-1">
         {/* Sidebar fixed width */}
-          <SideBar />
+          <SideBar/>
         {/* Main content fills remaining space */}
         <main className="flex-1 bg-gray-50">
           {children}

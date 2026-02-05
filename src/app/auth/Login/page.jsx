@@ -1,79 +1,54 @@
 "use client";
-<<<<<<< HEAD:src/app/auth/Login/page.jsx
-import { Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
-import { useAuthStore } from "../../store/store";
-import { useRouter } from "next/navigation";
-import toast, { Toaster } from "react-hot-toast";
-import Link from "next/link";
-=======
+import SignupUser from '@/app/components/SignupUser';
+import UserStore from '@/app/store/Userstore';
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import {  useEffect,useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import UserStore from '../store/Userstore';
-import { shallow } from 'zustand/shallow';
-import Singup from '../components/SingupUser';
-import SingupUser from '../components/SingupUser';
 
-export function PreventUserLogin (user,router){
-    if(user){
-        router.replace("/Dashboard")
-    }
-}
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
+
+
+// 
 
 function Login() {
     const router = useRouter()
-    const user = UserStore((state)=>state.user)
+    const user = UserStore(state=>state.user)
+   
     const [showPassw,setShowPassw] = useState(false)
     const [formData,setFormData] = useState({
-        businessName:"",
+        
         email:"",
         password:""
     }) 
     
 
-<<<<<<< HEAD:src/app/auth/Login/page.jsx
-    const router = useRouter();
-    const [showPassw, setShowPassw] = useState(false)
-
-    const {
-        email,
-        password,
-        setEmail,
-        setPassword,
-        signIn,
-    } = useAuthStore();
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-
-        if (!email || !password) {
-            toast.error("Please fill all the fields");
-            return;
-        }
-
-        signIn();
-        toast.success("Signing in....");
-        router.push("/Dashboard/Home");
-=======
         
     function handleChange(e){
         const {name,value} = e.target
         setFormData({...formData,[name]:value})
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Login/page.jsx
     }
 
     function handleSubmit(e){
         e.preventDefault();
+        if(formData.password.length < 8){
+            toast.error("Password at least 8 characters long.")
+            return
+        }
         toast.success("Sing in...")
-        SingupUser(formData)  
+          SignupUser(formData)
         setTimeout(() => {
-            router.push("/Dashboard")
+            router.replace("/Dashboard/Home")
         }, 2000);
     }
+
+    useEffect(()=>{
+        if(user){
+          router.replace("/Dashboard/Home")
+        }else{
+          router.replace("/auth/Login")
+        }
+      },[])
 
    
     
@@ -95,18 +70,7 @@ function Login() {
                 <form 
                 onSubmit={handleSubmit} 
                 className='flex flex-col gap-2'>
-                    <div className='flex flex-col gap-2'>
-                        <label className='text-[14px] font-medium'>Email</label>
-                        <input
-                            type="text"
-                            value={formData?.businessName || ""}
-                            required
-                            onChange={handleChange}
-                            name='businessName'
-                            className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
-                            placeholder="@gmail.com"
-                        />
-                    </div>
+                   
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
                         <input

@@ -1,31 +1,29 @@
 "use client";
 import React from 'react';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import Navbar from './Navbar';
+import Link from 'next/link';
+import { HomeIcon, List, PlusCircle } from 'lucide-react';
 function SideBar() {
   const router = useRouter();
+  const pathName = usePathname()
+
+
+   const isActive = (path)=>
+        pathName === path? "bg-linear-to-r from-orange-400 text-gray-50 to-orange-600 p-2 decoration-none px-4 flex gap-3  duration-900 transition-all w-50 h-fit rounded-lg " : "bg-none text-center flex gap-3 text-gray-500 p-2 px-4 "
+  
   return (
-    <div className="w-53 max-h-full text-gray-800 bg-white">
-      <div className="font-medium tracking-wider flex flex-col my-9 items-start justify-center">
-
-        <button
-          onClick={() => router.push("/Dashboard/Home")}
-          className="focus:bg-linear-to-r focus:from-orange-400 focus:to-orange-600 pl-5 pr-24.5 rounded-xl mx-2 focus:text-gray-50 cursor-pointer py-1.5">
-          <span className='text-[14px]'>🏠</span> Home
-        </button>
-
-        <button
-          onClick={() => router.push("/Dashboard/Createorder")}
-          className="focus:bg-linear-to-r focus:from-orange-400 focus:to-orange-600 pl-5 pr-10 rounded-xl mx-2 focus:text-gray-50 cursor-pointer py-1.5">
-          <span className='text-[14px]'>📝</span> Create Order
-        </button>
-
-        <button
-          onClick={() => router.push("/Dashboard/Orderlist")}
-          className="focus:bg-linear-to-r focus:from-orange-400 focus:to-orange-600 pl-5 pr-17 rounded-xl mx-2 focus:text-gray-50 cursor-pointer py-1.5">
-          <span className='text-[14px]'>📄</span> Order List
-        </button>
-
+    <div className="w-53 max-h-full text-gray-800 pt-9 bg-white flex justify-center">
+      <div>
+        <li className='list-none '>
+          <Link href="/Dashboard/Home" className={isActive("/Dashboard/Home")}>🏠  Home </Link>
+        </li>
+        <li className='list-none '>
+          <Link href="/Dashboard/Createorder" className={isActive("/Dashboard/Createorder")}>📝 CreateOrder </Link>
+        </li>
+        <li className='list-none '>
+          <Link href='/Dashboard/Orderlist' className={isActive("/Dashboard/Orderlist")}>📄 OrderList</Link>
+        </li>
       </div>
     </div>
   );

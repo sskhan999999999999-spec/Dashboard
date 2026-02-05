@@ -3,19 +3,15 @@ import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-<<<<<<< HEAD:src/app/auth/Signup/page.jsx
-import toast from 'react-hot-toast';
-import { Toaster } from 'react-hot-toast';
-=======
 import { Toaster ,toast} from 'react-hot-toast';
-import UserStore from '../store/Userstore';
-import SingupUser from '../components/SingupUser';
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
+import SingupUser from '@/app/components/SignupUser';
+import UserStore from '@/app/store/Userstore';
+
 
 function page() {
 
   const router = useRouter()
-  const user = UserStore((state)=>state.user)
+  const user = UserStore()
   const [checkbox,setCheckbox] = useState(false)
   const [hidePass,setHidePass] = useState(false)
   const [form,setForm] = useState({
@@ -40,40 +36,29 @@ function page() {
     }else if(!checkbox ){
       toast.error("Please accept Terms and Conditions")
       return
-<<<<<<< HEAD:src/app/auth/Signup/page.jsx
-    } else if (formData.buisnessName && formData.email && formData.password) {
-      toast.success("Sing up Successfully!")
-      localStorage.setItem("formdata", JSON.stringify(formData))
-      setTimeout(() => {
-        router.push("/Dashboard/Home")
-      }, 2000);
-
-=======
-    }else{
+    }else if(form.password.length < 8 ){
+      toast.error("Password at least 8 characters long.")
+      return
+    }
+    else{
         toast.success("Sing up Successfully!")
           SingupUser(form)
         setTimeout(() => {
-          router.push("/Dashboard")
+          router.replace("/Dashboard/Home")
         }, 2000);
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
     }
   }
+
+  useEffect(()=>{
+    if(user){
+      router.replace("/Dashboard/Home")
+    }else{
+      router.replace("/auth/Login")
+    }
+  },[])
  
   
 
-<<<<<<< HEAD:src/app/auth/Signup/page.jsx
-  useEffect(() => {
-    const data = localStorage.getItem("formdata")
-    if (data) {
-      JSON.parse(data)
-      router.push("/Dashboard/Home")
-=======
-  useEffect(()=>{
-    if(form.businessName != "" && form.email != "" && form.password !=""){
-     router.push("/Dashboard")
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
-    }
-  },[router])
 
   return (
     <div className='min-h-screen grid place-items-center bg-gray-100 p-2'>
@@ -130,15 +115,9 @@ function page() {
             </span>
           </div>
 
-<<<<<<< HEAD:src/app/auth/Signup/page.jsx
-            <p className='text-sm'>I agree to the <span className='text-orange-600 hover:border-b hover:border-b-orange-600' > <Link href="/auth/Terms" target='_blank'>Terms & conditions</Link></span> and <span className='text-orange-600 hover:border-b hover:border-b-orange-600'> <Link href="/auth/Privacy" target='_blank'>Privacy Policy</Link> </span></p>
-          </div>
-          <div onClick={handleSubmit} className={checkbox ? 'bg-linear-to-r from-orange-400 to-orange-600 text-center text-white p-1 py-1.5 rounded-lg mt-2 ' : "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}>
-            <button type='submit' >Sign up</button>
-=======
           {/* Checkbox */}
           <div className='flex gap-1 mt-2'>
-            <input type="checkbox" checked={checkbox} onChange={() => setCheckbox(!checkbox)} />
+            <input type="checkbox" className='outline-none' checked={checkbox} onChange={() => setCheckbox(!checkbox)} />
             <p className='text-sm'>
               I agree to the
               <span className='text-orange-600 hover:border-b hover:border-b-orange-600'>
@@ -157,7 +136,6 @@ function page() {
             : "bg-orange-300 text-center text-white p-1 py-1.5 rounded-lg mt-2"}>
 
             <button type='submit'>Sing up</button>
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
           </div>
 
           {/* OR */}
@@ -166,22 +144,19 @@ function page() {
             <span>OR</span>
             <span className='w-full border h-0 border-black/30'></span>
           </div>
-<<<<<<< HEAD:src/app/auth/Signup/page.jsx
           <div className='text-center'>
             <p className='text-sm'>Already have an account? <span className='text-orange-600 cursor-pointer font-semibold'><Link href="/auth/Login">Log in</Link> </span></p>
           </div>
-        </form>
-=======
->>>>>>> 76af7f9b866e8f5450cf5264f8e686d1b1abc44e:src/app/Singup/page.jsx
+       
 
-          <div className='text-center'>
+          {/* <div className='text-center'>
             <p className='text-sm'>
               Already have an account?
               <span className='text-orange-600 cursor-pointer font-semibold'>
                 <Link href="/Login"> Log in</Link>
               </span>
             </p>
-          </div>
+          </div> */}
 
         </form>
       </div>
