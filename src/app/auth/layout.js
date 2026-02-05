@@ -1,12 +1,6 @@
 
-export default function authLayout({ children }) {
+export default function AuthLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-            {children}
-      </body>
-    </html>
+    <div>{children}</div>
   );
 }
