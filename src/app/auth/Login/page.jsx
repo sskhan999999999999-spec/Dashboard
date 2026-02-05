@@ -1,46 +1,59 @@
 "use client";
+import SignupUser from '@/app/components/SignupUser';
+import UserStore from '@/app/store/Userstore';
 import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import {  useEffect,useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
-import UserStore from '@/app/store/Userstore';
-import SingupUser from '@/app/components/SingupUser';
 
-export function PreventUserLogin(user, router) {
-    if (user) {
-        router.replace("/Dashboard/Home")
-    }
-}
+
+
+// 
 
 function Login() {
     const router = useRouter()
-    const user = UserStore((state) => state.user)
-    const [showPassw, setShowPassw] = useState(false)
-    const [formData, setFormData] = useState({
-        businessName: "",
-        email: "",
-        password: ""
-    })
+    const user = UserStore(state=>state.user)
+   
+    const [showPassw,setShowPassw] = useState(false)
+    const [formData,setFormData] = useState({
+        
+        email:"",
+        password:""
+    }) 
+    
 
-
-    function handleChange(e) {
-        const { name, value } = e.target
-        setFormData({ ...formData, [name]: value })
+        
+    function handleChange(e){
+        const {name,value} = e.target
+        setFormData({...formData,[name]:value})
     }
 
     function handleSubmit(e) {
         e.preventDefault();
-        if (formData?.email === "" || formData?.password === "") {
-            toast.error("Please fill the field's")
+        if(formData.password.length < 8){
+            toast.error("Password at least 8 characters long.")
             return
         }
-        toast.success("Sign in...")
-        SingupUser(formData)
+        toast.success("Sing in...")
+          SignupUser(formData)
         setTimeout(() => {
-            router.push("/Dashboard/Home")
-        }, 2000);
+            router.replace("/Dashboard/Home")
+        }, 3000);
     }
+
+    useEffect(()=>{
+        if(user){
+          router.replace("/Dashboard/Home")
+        }else{
+          router.replace("/auth/Login")
+        }
+      },[user])
+
+   
+    
+    
+
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
@@ -54,13 +67,14 @@ function Login() {
                     Sign In to your account !
                 </h3>
 
-                <form
-                    onSubmit={handleSubmit}
-                    className='flex flex-col gap-2'>
+                <form 
+                onSubmit={handleSubmit} 
+                className='flex flex-col gap-2'>
+                   
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
                         <input
-                            type="text"
+                            type="email"
                             value={formData?.email || ""}
                             required
                             onChange={handleChange}

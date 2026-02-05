@@ -1,8 +1,8 @@
 import UserStore from "../store/Userstore"
 
-function SingupUser(data) {
+function SignupUser(data) {
     const singup = UserStore.getState().signup
     singup(data)
 }
 
-export default SingupUser;
+export default SignupUser

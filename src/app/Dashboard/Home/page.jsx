@@ -1,10 +1,13 @@
 "use client"
+import UserStore from '@/app/store/Userstore'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import { Typewriter } from 'react-simple-typewriter'
+
+
 
 function page() {
   const [data, setData] = useState()
+  const {user} = UserStore()
   const router = useRouter()
 
   useEffect(() => {
@@ -16,6 +19,22 @@ function page() {
     localStorage.clear()
     router.push("/")
   }
+  
+   useEffect(() => {
+    if(user){
+    router.replace("/Dashboard/Home");
+
+    const handlePopState = (e) => {
+      router.replace("Dashboard/Home");
+    };
+
+    window.addEventListener("popstate", handlePopState);
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState);
+    };
+    }
+  }, [router]);
 
   return (
     <div>
@@ -23,15 +42,7 @@ function page() {
         <h1 className='text-6xl text-center pt-70 font-medium pb-29 pr-32 text-gray-800'>
 
           <div>
-            <Typewriter
-              words={["Welcome to Dashboard !"]}
-              loop={1}
-              cursor
-              cursorStyle="|"
-              typeSpeed={140}
-              deleteSpeed={0}
-              delaySpeed={3000}
-            />
+           Hello world
           </div>
 
         </h1>

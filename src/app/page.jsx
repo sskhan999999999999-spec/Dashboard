@@ -12,10 +12,10 @@ export default function Home() {
       
       const router = useRouter()
       
-          if(User()){
-            redirect("/Dashboard")
+          if(User){
+            redirect("/Dashboard/Home")
           }else{
-            redirect("/Login")
+            redirect("/auth/Login")
           }
        
     
