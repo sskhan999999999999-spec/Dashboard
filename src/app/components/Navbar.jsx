@@ -11,10 +11,13 @@ function Navbar() {
   
  
 
-  function handleLogout (){
-    logout()
-    router.replace("/auth/Login")
+  
+
+  function handleLogout(){
+    logout();
+    toast.success("Logout Successfully !")
     
+    redirect("/auth/Login");
   }
    useEffect(() => {
     const handlePopState = () => {
@@ -32,6 +35,7 @@ function Navbar() {
   }, [router]);
   return (
     <nav className='flex items-center justify-between p-4'>
+      <Toaster />
         <h1 className='text-3xl text-amber-500 tracking-widest font-extrabold pl-10'>Dashboard</h1>
         <button className='bg-orange-400 px-5 py-1.5 rounded-lg cursor-pointer font-medium text-white hover:bg-orange-500' onClick={handleLogout}>Logout</button>
     </nav>

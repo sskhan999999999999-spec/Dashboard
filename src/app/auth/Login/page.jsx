@@ -89,8 +89,7 @@ function Login() {
                         <input
                             type={showPassw ? "text" : "password"}
                             value={formData?.password || ""}
-                            onChange={handleChange}
-                            name='password'
+                            onChange={handleChange}                            name='password'
                             className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
                             placeholder="Enter your password"
                         />
