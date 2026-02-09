@@ -1,7 +1,6 @@
-"use client"; // if using Next 13 App Router
 
-import SideBar from "../components/Sidebar";
 import Navbar from "../components/Navbar";
+import SideBar from "../components/Sidebar";
 
 export default function PageLayout({ children }) {
   return (
