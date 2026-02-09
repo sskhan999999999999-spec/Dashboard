@@ -43,7 +43,7 @@ function Login() {
     }
 
     useEffect(()=>{
-        if(user){
+        if(user?.email && user?.password){
           router.replace("/Dashboard/Home")
         }else{
           router.replace("/auth/Login")

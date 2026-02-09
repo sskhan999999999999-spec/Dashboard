@@ -50,14 +50,13 @@ function page() {
   }
 
   useEffect(()=>{
-    if(user){
-      router.replace("/Dashboard/Home")
-    }else{
-      router.replace("/auth/Login")
+    if(user?.businessName && user?.email && user?.password){
+      window.location.replace("/Dashboard/Home")
     }
   },[])
  
   
+  console.log(user?.email)
 
 
   return (
@@ -106,6 +105,7 @@ function page() {
               onChange={handleChange}
               name='password'
               required
+              autoComplete="current-password" 
               type={hidePass ? "text" : "password"}
               className='w-full p-1 px-2 bg-transparent border border-black/30 rounded-lg outline-orange-400'
               placeholder='Password'

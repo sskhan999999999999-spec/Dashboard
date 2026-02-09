@@ -13,7 +13,7 @@ function Navbar() {
 
   function handleLogout (){
     logout()
-    router.replace("/auth/Login")
+   window.location.replace("/auth/Login")
     
   }
    useEffect(() => {
