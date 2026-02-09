@@ -13,9 +13,9 @@ export default function Home() {
       const router = useRouter()
       
           if(User()){
-            redirect("/Dashboard")
+            redirect("/Dashboard/Home")
           }else{
-            redirect("/Login")
+            redirect("/auth/Login")
           }
        
     

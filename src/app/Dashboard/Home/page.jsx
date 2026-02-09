@@ -12,11 +12,6 @@ function page() {
     if (savedUser) setData(JSON.parse(savedUser))
   }, [])
 
-  function handleLogout() {
-    localStorage.clear()
-    router.push("/")
-  }
-
   return (
     <div>
       <div className='bg-gray-50'>
