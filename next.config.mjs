@@ -1,7 +1,9 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
-  reactCompiler: true,
+  reactStrictMode: true,
+  experimental: {
+    // turbo: false, // Turbopack disable for cache/OneDrive issues
+  },
 };
 
 export default nextConfig;
