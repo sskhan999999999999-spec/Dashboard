@@ -4,7 +4,7 @@ import { persist } from "zustand/middleware";
  export const useOrderStore = create(
   persist(
     (set) => ({
-      createOrder: "",
+      createOrder: '',
       orderList: [],
 
       setCreateOrder: (value) => set({ createOrder: value }),
@@ -13,8 +13,8 @@ import { persist } from "zustand/middleware";
         set((state) => {
           if (!state.createOrder.trim()) return {};
           return{
-            orderList: [...state.orderList, state.createOrder],
-            createOrder: "",
+            orderList: [state.createOrder,...state.orderList],
+            createOrder: '',
           }
         }),
 
