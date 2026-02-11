@@ -1,4 +1,5 @@
 
+import { Kaushan_Script, Khand } from "next/font/google";
 import Navbar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
 
@@ -19,4 +20,4 @@ export default function PageLayout({ children }) {
 
     </div>
   );
-}
+};

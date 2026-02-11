@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 
 function Createorder() {
 
-  const createOrder = useOrderStore((s) => s.creatOrder);
+  const createOrder = useOrderStore((s) => s.createOrder);
   const orderList = useOrderStore((s) => s.orderList);
   const setCreateOrder = useOrderStore((s) => s.setCreateOrder);
   const addOrder = useOrderStore((s) => s.addOrder);
