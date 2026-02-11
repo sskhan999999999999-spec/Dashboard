@@ -1,7 +1,8 @@
 "use client";
-import React from 'react'
+import React, { useState } from 'react'
 import { useOrderStore } from '@/app/store/store';
 import { useSearchParams } from 'next/navigation';
+import { MoreHorizontal, MoreVertical } from 'lucide-react';
 
 function Createorder() {
 
@@ -10,43 +11,56 @@ function Createorder() {
   const setCreateOrder = useOrderStore((s) => s.setCreateOrder);
   const addOrder = useOrderStore((s) => s.addOrder);
   const removeOrder = useOrderStore((s) => s.removeOrder);
+  const clearInput = useOrderStore((s)=> s.clearInput)
+  const [dropDown,setDropDown] = useState(null)
 
   function handleAddOrder(e) {
     e.preventDefault();
-    addOrder();
+    addOrder()
   };
 
   return (
-    <div>
-      <h1 className='text-center text-gray-800 p-5 font-bold text-5xl'>Create Order !</h1>
+    <div className=' h-full  p-4 sm:pb-20'>
+      <h1 className='md:text-center sm:text-end text-center sm:mr-14 text-gray-800 p-5 font-bold text-2xl sm:text-5xl'>Create Order !</h1>
       <form
         onSubmit={handleAddOrder}
-        className='flex relative items-cente justify-center p-4'>
+        className='flex relative items-center sm:justify-end md:justify-center p-4'>
         <input
           type="text"
           value={createOrder}
           onChange={(e) => setCreateOrder(e.target.value)}
-          className='w-2xl p-3 bg-gray-100 focus:bg-gray-200 rounded-lg focus:outline outline-gray-300 placeholder:font-medium'
+          className='w-full sm:max-w-md lg:max-w-2xl p-3 bg-gray-100 focus:bg-gray-200 rounded-lg focus:outline outline-gray-300 placeholder:font-medium'
           placeholder='Create Your Order !'
+          
         />
         <span
           onClick={handleAddOrder}
-          className='absolute cursor-pointer right-93 top-7'>➕</span>
+          className='absolute cursor-pointer right-10 sm:right-10 md:right-30 lg:right-115  top-7 font-semibold'>Add</span>
       </form>
+      <div className='flex justify-center'>
+      <div className={orderList.length < 1 ? "hidden" :
+  `flex flex-col text-2xl p-4 h-full max-h-100 overflow-y-auto bg-gray-300 w-full sm:max-w-2xl lg:max-w-5xl rounded-xl`
+      }>
+  
 
-      <div className='text-center text-2xl p-4'>
         {orderList.map((order, index) => (
           <div
-            key={index}
+           key={index}
+           className="flex justify-between mt-3 gap-3 items-start "
           >
-            <span>{order}</span>
+          <span className="flex-1 min-w-0 wrap-break-word">
+            {order}
+          </span>
+
             <button
              onClick={() => removeOrder(index)}
-             className='p-1 pl-3 cursor-pointer text-[19px]'
-             >❌</button>
+             className='p-2 rounded-lg font-semibold cursor-pointer text-[15px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
+             >Delete</button>
           </div>
         ))}
       </div>
+      </div>
+      
     </div>
   )
 }

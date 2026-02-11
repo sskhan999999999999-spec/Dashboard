@@ -13,18 +13,11 @@ export default function Home() {
       const router = useRouter()
       
           if(User){
-            redirect("/Dashboard/Home")
+            router.replace("/Dashboard/Home")
           }else{
-            redirect("/auth/Login")
+            router.replace("/auth/Login")
           }
-       
-    
-       
           
-            
-       
-      
-      
        return (
         <div>
          

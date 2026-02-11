@@ -7,10 +7,6 @@ import { useRouter } from 'next/navigation';
 import {  useEffect,useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-
-
-// 
-
 function Login() {
     const router = useRouter()
     const user = UserStore(state=>state.user)
@@ -21,8 +17,6 @@ function Login() {
         email:"",
         password:""
     }) 
-    
-
         
     function handleChange(e){
         const {name,value} = e.target
@@ -43,17 +37,12 @@ function Login() {
     }
 
     useEffect(()=>{
-        if(user){
+        if(user?.email && user?.password){
           router.replace("/Dashboard/Home")
         }else{
           router.replace("/auth/Login")
         }
       },[user])
-
-   
-    
-    
-
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
