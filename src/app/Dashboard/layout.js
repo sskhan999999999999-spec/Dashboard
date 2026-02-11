@@ -11,7 +11,7 @@ export default function PageLayout({ children }) {
 
       <div className="h-full ">
           <SideBar />
-        <main className=" w-full   bg-gray-50">
+        <main className="w-full bg-gray-50">
           {children}
         </main>
       </div>
