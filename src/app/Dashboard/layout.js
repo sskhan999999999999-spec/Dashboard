@@ -6,15 +6,15 @@ import SideBar from "../components/Sidebar";
 
 export default function PageLayout({ children }) {
   return (
-    <div className="flex flex-col   w-full max-w-screen ">
+    <div className="flex flex-col min-h-screen  w-full max-w-screen ">
 
       <div className="shadow-sm z-10">
         <Navbar />
       </div>
 
-      <div className=" mt-17  h-full ">
+      <div className="  h-full ">
           <SideBar />
-        <main className=" w-full min-h-screen   bg-gray-50">
+        <main className=" w-full   bg-gray-50">
           {children}
         </main>
       </div>
