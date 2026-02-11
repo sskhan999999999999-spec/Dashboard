@@ -15,10 +15,10 @@ function SideBar() {
   return (
     <div className="w-53 max-h-full h-screen fixed left-0 text-gray-800 pt-9 bg-white hidden sm:flex justify-center">
       <div>
-        <li className='list-none '>
+        <li className='list-none  '>
           <Link href="/Dashboard/Home" className={isActive("/Dashboard/Home")}>🏠  Home </Link>
         </li>
-        <li className='list-none '>
+        <li className='list-none  '>
           <Link href="/Dashboard/Createorder" className={isActive("/Dashboard/Createorder")}>📝 CreateOrder </Link>
         </li>
         <li className='list-none '>

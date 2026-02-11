@@ -9,6 +9,7 @@ import { Toaster, toast } from "react-hot-toast";
 function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const user = UserStore.getState().user;
 
   const logout = UserStore.getState().logout;
 
@@ -23,7 +24,36 @@ function Navbar() {
       <Toaster />
 
       {/* Navbar */}
-      <nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed top-0 z-50 px-6">
+      {user?.email === "super@gmail.com"?<nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed sm:sticky top-0 z-50 px-6">
+        
+        {/* Menu button (mobile) */}
+        <button
+          className="sm:hidden flex"
+          onClick={() => setOpen(!open)}
+        >
+          <Menu />
+        </button>
+
+        {/* Title */}
+        <div className="font-bold text-2xl sm:text-3xl text-orange-400">
+          DASHBOARD
+        </div>
+        <div className="text-3xl font-medium ">
+         <h1 >SUPER-ADMIN</h1> 
+        </div>
+
+        {/* Desktop Links */}
+        <div className="hidden sm:flex gap-10 items-center">
+      
+
+          <button
+            onClick={handleLogout}
+            className="bg-orange-400 font-medium text-xl px-5 py-1.5 rounded-lg text-white hover:bg-orange-500"
+          >
+            Logout
+          </button>
+        </div>
+      </nav>:<nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed sm:sticky top-0 z-50 px-6">
         
         {/* Menu button (mobile) */}
         <button
@@ -49,7 +79,8 @@ function Navbar() {
             Logout
           </button>
         </div>
-      </nav>
+      </nav>}
+      
 
       {/* Overlay */}
       {open && (

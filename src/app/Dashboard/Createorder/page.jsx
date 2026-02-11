@@ -20,33 +20,33 @@ function Createorder() {
   };
 
   return (
-    <div className='  p-4'>
-      <h1 className='text-center text-gray-800 p-5 font-bold text-2xl sm:text-5xl'>Create Order !</h1>
+    <div className=' h-full  p-4 sm:pb-20'>
+      <h1 className='md:text-center sm:text-end text-center sm:mr-14 text-gray-800 p-5 font-bold text-2xl sm:text-5xl'>Create Order !</h1>
       <form
         onSubmit={handleAddOrder}
-        className='flex relative items-cente justify-center p-4'>
+        className='flex relative items-center sm:justify-end md:justify-center p-4'>
         <input
           type="text"
           value={createOrder}
           onChange={(e) => setCreateOrder(e.target.value)}
-          className='w-2xl p-3 bg-gray-100 focus:bg-gray-200 rounded-lg focus:outline outline-gray-300 placeholder:font-medium'
+          className='w-full sm:max-w-md lg:max-w-2xl p-3 bg-gray-100 focus:bg-gray-200 rounded-lg focus:outline outline-gray-300 placeholder:font-medium'
           placeholder='Create Your Order !'
           
         />
         <span
           onClick={handleAddOrder}
-          className='absolute cursor-pointer right-115 top-7 font-semibold'>Add</span>
+          className='absolute cursor-pointer right-10 sm:right-10 md:right-30 lg:right-115  top-7 font-semibold'>Add</span>
       </form>
       <div className='flex justify-center'>
       <div className={orderList.length < 1 ? "hidden" :
-  `flex flex-col text-2xl p-4 bg-gray-300 w-full max-w-5xl rounded-xl`
+  `flex flex-col text-2xl p-4 h-full max-h-100 overflow-y-auto bg-gray-300 w-full sm:max-w-2xl lg:max-w-5xl rounded-xl`
       }>
   
 
         {orderList.map((order, index) => (
           <div
            key={index}
-           className="flex justify-between mt-3 gap-3 items-start"
+           className="flex justify-between mt-3 gap-3 items-start "
           >
           <span className="flex-1 min-w-0 wrap-break-word">
             {order}
@@ -54,7 +54,7 @@ function Createorder() {
 
             <button
              onClick={() => removeOrder(index)}
-             className='p-2 px-4 rounded-lg font-semibold cursor-pointer text-[19px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
+             className='p-2 rounded-lg font-semibold cursor-pointer text-[15px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
              >Delete</button>
           </div>
         ))}

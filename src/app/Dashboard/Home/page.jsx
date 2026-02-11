@@ -38,8 +38,8 @@ function page() {
 
   return (
     <div>
-      <div className='bg-gray-50'>
-        <h1 className='text-6xl text-center pt-70 font-medium pb-29 pr-32 text-gray-800'>
+      <div className='bg-gray-50 h-full'>
+        <h1 className='text-3xl sm:text-6xl text-center pt-70 font-medium pb-29 pr-32 text-gray-800'>
 
           <div>
             <p>This Is Home Page</p>
