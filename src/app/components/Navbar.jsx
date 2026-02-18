@@ -14,12 +14,16 @@ function Navbar() {
 
   const logout = UserStore.getState().logout;
 
-  useEffect(() => {
-    setMounted(true);
-    setUser(UserStore.getState().user);
-  }, []);
 
-  if (!mounted) return null;
+  useEffect(()=>{
+    setMounted(true)
+  },[])
+  if(!mounted) return null;
+
+ 
+ 
+
+ 
 
   function handleLogout() {
     logout();
@@ -49,8 +53,30 @@ function Navbar() {
             Logout
           </button>
         </div>
-      </nav>
+     
 
+        {/* Title */}
+        <div className="font-bold text-2xl sm:text-3xl text-orange-400">
+          DASHBOARD
+        </div>
+
+        
+
+        {/* Desktop Links */}
+        <div className="hidden sm:flex gap-10 items-center">
+      
+
+          <button
+            onClick={handleLogout}
+            className="bg-orange-400 font-medium text-xl px-5 py-1.5 rounded-lg text-white hover:bg-orange-500"
+          >
+            Logout
+          </button>
+        </div>
+      </nav>
+      
+
+      {/* Overlay */}
       {open && (
         <div
           className="fixed inset-0 bg-black/40 z-40"

@@ -2,7 +2,7 @@
 import React, { useState } from 'react'
 import { useOrderStore } from '@/app/store/store';
 import { useSearchParams } from 'next/navigation';
-import { MoreHorizontal, MoreVertical } from 'lucide-react';
+import { Flag, MoreHorizontal, MoreVertical } from 'lucide-react';
 
 function Createorder() {
 
@@ -11,13 +11,26 @@ function Createorder() {
   const setCreateOrder = useOrderStore((s) => s.setCreateOrder);
   const addOrder = useOrderStore((s) => s.addOrder);
   const removeOrder = useOrderStore((s) => s.removeOrder);
-  const clearInput = useOrderStore((s)=> s.clearInput)
-  const [dropDown,setDropDown] = useState(null)
+  const [modal,setModal] = useState(false)
+  const [radio,setRadio] = useState("For Admin")
+
+  
 
   function handleAddOrder(e) {
     e.preventDefault();
-    addOrder()
+    setModal(true)
+    
   };
+
+  
+
+  function handleOrder (){
+    
+    setTimeout(() => {
+      addOrder(createOrder,radio)
+      setModal(false)
+    }, 500);
+  }
 
   return (
     <div className=' h-full  p-4 sm:pb-20'>
@@ -49,17 +62,85 @@ function Createorder() {
            className="flex justify-between mt-3 gap-3 items-start"
           >
           <span className="flex-1 min-w-0 wrap-break-word">
-            {order}
+            {order.text}
           </span>
-
+            <div className='flex gap-2 items-center'>
+              <p className='text-sm ' id={index} >{order.type}</p>
             <button
              onClick={() => removeOrder(index)}
              className='p-1.5 px-3 rounded-lg font-semibold cursor-pointer text-[15px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
              >Delete</button>
+             </div>
           </div>
         ))}
       </div>
       </div>
+
+       {modal && (
+        <div
+          className="fixed inset-0 bg-black/40 z-40 duration-300 transition-all"
+          onClick={() => setModal(false)}
+        ></div>
+      )}
+{modal && (
+  <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div className="bg-white w-96 p-6 rounded-xl text-xl font-semibold">
+      <h2 className="mb-4">Select Order Type</h2>
+
+      <div className="flex flex-col gap-2">
+        <label className="flex items-center gap-2">
+          <input
+            type="radio"
+            name="orderType"   // same name for group
+            value="For Admin"
+            checked={radio === "For Admin"}
+            onChange={(e) => setRadio(e.target.value)}
+          />
+          Order to Admin
+        </label>
+
+        <label className="flex items-center gap-2">
+          <input
+            type="radio"
+            name="orderType"
+            value="For User"
+            checked={radio === "For User"}
+            onChange={(e) => setRadio(e.target.value)}
+          />
+          Order to User
+        </label>
+
+        <label className="flex items-center gap-2">
+          <input
+            type="radio"
+            name="orderType"
+            value="For Both"
+            checked={radio === "For Both"}
+            onChange={(e) => setRadio(e.target.value)}
+          />
+          Order to Both Admin and User
+        </label>
+      </div>
+
+      <div className="flex justify-end mt-6 gap-4">
+        <button
+          onClick={() => setModal(false)}
+          className="px-4 py-2 rounded-lg border"
+        >
+          Cancel
+        </button>
+
+        <button
+          onClick={handleOrder} // add order with current radio
+          className="px-4 py-2 rounded-lg bg-orange-400 text-white hover:bg-orange-500"
+        >
+          Confirm
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
       
     </div>
   )

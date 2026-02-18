@@ -17,7 +17,7 @@ function Orderlist() {
           <div
             key={index}
           >
-            <span className='pr-5'>{order}</span>
+            <span className='pr-5'>{order.text}</span>
             <Toggle/>
           </div>
         ))}

@@ -1,8 +1,8 @@
 "use client";
 import SignupUser from '@/app/components/SignupUser';
+import { createUserStore } from '@/app/store/CreateUserStore';
 import UserStore from '@/app/store/Userstore';
 import { Eye, EyeOff } from 'lucide-react';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import {  useEffect,useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
@@ -10,10 +10,10 @@ import { Toaster, toast } from 'react-hot-toast';
 function Login() {
     const router = useRouter()
     const user = UserStore(state=>state.user)
+    const usersData = createUserStore.getState().users
    
     const [showPassw,setShowPassw] = useState(false)
     const [formData,setFormData] = useState({
-        
         email:"",
         password:""
     }) 
@@ -22,18 +22,29 @@ function Login() {
         const {name,value} = e.target
         setFormData({...formData,[name]:value})
     }
-
+    console.log(usersData);
+    
     function handleSubmit(e) {
         e.preventDefault();
-        if(formData.password.length < 8){
-            toast.error("Password at least 8 characters long.")
-            return
+
+        if (formData.email === "super@gmail.com"){
+           router.replace("/Dashboard/Home")
+           SignupUser(formData)
+           return
         }
-        toast.success("Signing...")
-        SignupUser(formData)
-        setTimeout(() => {
-            router.replace("/Dashboard/Home")
-        }, 3000);
+
+         const foundUser = usersData
+            .filter(u => u && u.email && u.password) // null aur empty remove
+            .find(
+                u =>
+                u.email === formData.email &&
+                u.password === formData.password
+            );
+            if(!foundUser){
+            toast.error("You are not a member")
+            return
+         }
+         router.replace("/Dashboard/Home")
     }
 
     useEffect(()=>{
@@ -100,12 +111,12 @@ function Login() {
                     </button>
                 </form>
 
-                <p className="text-sm text-center text-gray-500">
+                {/* <p className="text-sm text-center text-gray-500">
                     Don’t have an account?
                     <Link href="/auth/Signup" onClick={() => toast.success("Welcome to Sign up...")} className="text-orange-500 ml-1 font-medium">
                         Sign up
                     </Link>
-                </p>
+                </p> */}
             </div>
         </div>
     );
