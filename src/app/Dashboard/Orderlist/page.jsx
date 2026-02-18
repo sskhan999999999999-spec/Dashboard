@@ -10,17 +10,20 @@ function Orderlist() {
 
   return (
     <div>
-      <h1 className='text-center text-gray-800 p-5 font-bold text-5xl'>Order List !</h1>
+      <h1 className='text-center text-gray-800 p-9 font-bold text-5xl'>Order List !</h1>
 
-      <div className='text-center text-2xl p-4'>
-        {orderList.map((order, index) => (
-          <div
-            key={index}
-          >
-            <span className='pr-5'>{order.text}</span>
-            <Toggle/>
-          </div>
-        ))}
+      <div className='flex justify-center'>
+        <div className='flex flex-col text-2xl p-5 h-full max-h-100 overflow-y-auto bg-gray-300 w-full sm:max-w-2xl lg:max-w-5xl rounded-xl'>
+          {orderList.map((order, index) => (
+            <div
+              key={index}
+              className='flex p-1 items-center justify-between'
+            >
+              <span className='pr-5'>{order.text}</span>
+              <Toggle />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   )
