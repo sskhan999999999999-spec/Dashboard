@@ -3,7 +3,7 @@ import { Eye, EyeOff } from 'lucide-react';
 import Link from 'next/link'
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
-import { Toaster ,toast} from 'react-hot-toast';
+import { Toaster, toast } from 'react-hot-toast';
 import SingupUser from '@/app/components/SignupUser';
 import UserStore from '@/app/store/Userstore';
 
@@ -12,57 +12,57 @@ function page() {
 
   const router = useRouter()
   const user = UserStore()
-  const [checkbox,setCheckbox] = useState(false)
-  const [hidePass,setHidePass] = useState(false)
-  const [form,setForm] = useState({
-    businessName:"",
-    email:"",
-    password:""
+  const [checkbox, setCheckbox] = useState(false)
+  const [hidePass, setHidePass] = useState(false)
+  const [form, setForm] = useState({
+    businessName: "",
+    email: "",
+    password: ""
   })
 
 
 
-  function handleChange(e){
-    const {name,value} = e.target
-    setForm({...form,[name]:value})
+  function handleChange(e) {
+    const { name, value } = e.target
+    setForm({ ...form, [name]: value })
   }
 
-  function handleSubmit (e){
+  function handleSubmit(e) {
     e.preventDefault()
 
-    if (!form.businessName || !form.email || !form.password){
+    if (!form.businessName || !form.email || !form.password) {
       toast.error("Please fill all inputs field")
       return
-    }else if(!checkbox ){
+    } else if (!checkbox) {
       toast.error("Please accept Terms and Conditions")
       return
-    }else if(form.password.length < 8 ){
+    } else if (form.password.length < 8) {
       toast.error("Password at least 8 characters long.")
       return
     }
-    else{
-        toast.success("Sing up Successfully!")
-          SingupUser(form)
-        setTimeout(() => {
-          router.replace("/Dashboard/Home")
-        }, 2000);
+    else {
+      toast.success("Sing up Successfully!")
+      SingupUser(form)
+      setTimeout(() => {
+        router.replace("/Dashboard/Home")
+      }, 2000);
     }
   }
 
-  useEffect(()=>{
-    if(user?.businessName && user?.email && user?.password){
+  useEffect(() => {
+    if (user?.businessName && user?.email && user?.password) {
       window.location.replace("/Dashboard/Home")
     }
-  },[])
- 
-  
+  }, [])
+
+
   console.log(user?.email)
 
 
   return (
     <div className='min-h-screen grid place-items-center bg-white p-2'>
       <div className='bg-[#ffffff] rounded-xl shadow-2xl w-full max-w-md flex justify-center p-4 pb-5'>
-        <Toaster/>
+        <Toaster />
 
         <form onSubmit={handleSubmit}>
           <h1 className='sm:text-3xl text-2xl font-bold text-orange-400 text-center'>Dashboard</h1>
@@ -97,7 +97,7 @@ function page() {
             />
           </div>
 
-          
+
           <div className='mt-2 relative'>
             <label className='text-sm'>Password *</label>
             <input
@@ -105,7 +105,7 @@ function page() {
               onChange={handleChange}
               name='password'
               required
-              autoComplete="current-password" 
+              autoComplete="current-password"
               type={hidePass ? "text" : "password"}
               className='w-full p-1 px-2 bg-transparent border border-black/30 rounded-lg outline-orange-400'
               placeholder='Password'
@@ -150,7 +150,7 @@ function page() {
 
         </form>
       </div>
-  </div>
+    </div>
   )
 }
 

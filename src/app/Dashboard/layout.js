@@ -1,6 +1,3 @@
-
-
-
 import Navbar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
 
@@ -12,13 +9,13 @@ export default function PageLayout({ children }) {
         <Navbar />
       </div>
 
-      <div className="  h-full ">
+      <div className="h-full ">
           <SideBar />
-        <main className=" w-full   bg-gray-50">
+        <main className="w-full bg-gray-50">
           {children}
         </main>
       </div>
 
     </div>
   );
-}
+};

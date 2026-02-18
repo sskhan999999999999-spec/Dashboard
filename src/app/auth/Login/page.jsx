@@ -7,10 +7,6 @@ import { useRouter } from 'next/navigation';
 import {  useEffect,useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
-
-
-// 
-
 function Login() {
     const router = useRouter()
     const user = UserStore(state=>state.user)
@@ -21,8 +17,6 @@ function Login() {
         email:"",
         password:""
     }) 
-    
-
         
     function handleChange(e){
         const {name,value} = e.target
@@ -35,8 +29,8 @@ function Login() {
             toast.error("Password at least 8 characters long.")
             return
         }
-        toast.success("Sing in...")
-          SignupUser(formData)
+        toast.success("Signing...")
+        SignupUser(formData)
         setTimeout(() => {
             router.replace("/Dashboard/Home")
         }, 3000);
@@ -49,11 +43,6 @@ function Login() {
           router.replace("/auth/Login")
         }
       },[user])
-
-   
-    
-    
-
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
