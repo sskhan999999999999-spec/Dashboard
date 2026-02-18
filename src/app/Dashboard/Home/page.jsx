@@ -4,8 +4,6 @@ import UserStore from '@/app/store/Userstore'
 import { useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 
-
-
 function page() {
   const users = createUserStore.getState().users
   const [data, setData] = useState()

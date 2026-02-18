@@ -1,32 +1,19 @@
 "use client"
-import {  redirect, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import UserStore from "./store/Userstore";
 import { useEffect } from "react";
 
-export function User (){
-    const user = UserStore((state)=>state.user)
-    user
-}
 
 export default function Home() {
-      
+      const user = UserStore.getState().user
       const router = useRouter()
       
-        if(User){
+        if(user){
             router.replace("/Dashboard/Home")
           }else{
             router.replace("/auth/Login")
           }
-      
-          
-       
-    
-       
-          
-            
-       
-      
-      
+   
        return (
         <div>
          

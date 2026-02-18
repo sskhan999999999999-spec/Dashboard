@@ -1,4 +1,5 @@
 "use client"
+import Toggle from '@/app/components/Toggle';
 import { useOrderStore } from '@/app/store/store';
 import React from 'react'
 
@@ -16,11 +17,8 @@ function Orderlist() {
           <div
             key={index}
           >
-            <span>{order.text}</span>
-            <button
-              onClick={() => removeOrder(index)}
-              className='p-1 pl-3 cursor-pointer text-[19px]'
-            >✅</button>
+            <span className='pr-5'>{order.text}</span>
+            <Toggle/>
           </div>
         ))}
       </div>

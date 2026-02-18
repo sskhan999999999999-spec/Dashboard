@@ -59,7 +59,7 @@ function Createorder() {
         {orderList.map((order, index) => (
           <div
            key={index}
-           className="flex justify-between mt-3 gap-3 items-start "
+           className="flex justify-between mt-3 gap-3 items-start"
           >
           <span className="flex-1 min-w-0 wrap-break-word">
             {order.text}
@@ -68,7 +68,7 @@ function Createorder() {
               <p className='text-sm ' id={index} >{order.type}</p>
             <button
              onClick={() => removeOrder(index)}
-             className='p-2 rounded-lg font-semibold cursor-pointer text-[15px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
+             className='p-1.5 px-3 rounded-lg font-semibold cursor-pointer text-[15px] bg-linear-to-r from-orange-400 to-orange-600 text-white'
              >Delete</button>
              </div>
           </div>
