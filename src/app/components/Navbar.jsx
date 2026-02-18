@@ -10,7 +10,8 @@ function Navbar() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
-  const [user, setUser] = useState(null);
+ 
+  const user = UserStore.getState().user
 
   const logout = UserStore.getState().logout;
 
@@ -30,11 +31,13 @@ function Navbar() {
     toast.success("Logout Successfully !");
     router.replace("/auth/Login");
   }
+  console.log(user?.email);
+  
 
   return (
     <div>
       <Toaster />
-      <nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed sm:sticky top-0 z-50 px-6">
+      <nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed sm:sticky top-0 z-50 px-8">
         <button className="sm:hidden flex" onClick={() => setOpen(!open)}>
           <Menu />
         </button>
@@ -42,7 +45,7 @@ function Navbar() {
         <div className="font-bold text-3xl sm:text-3xl text-orange-400">DASHBOARD</div>
 
         <div className="text-2xl font-medium">
-          {user?.email === "super@gmail.com" ? "SUPER-ADMIN" : "USER"}
+          {user?.email === "super@gmail.com"?"SUPER-ADMIN": "USER" }
         </div>
 
         <div className="hidden sm:flex gap-10 items-center">
@@ -56,23 +59,12 @@ function Navbar() {
      
 
         {/* Title */}
-        <div className="font-bold text-2xl sm:text-3xl text-orange-400">
-          DASHBOARD
-        </div>
+        
 
         
 
         {/* Desktop Links */}
-        <div className="hidden sm:flex gap-10 items-center">
-      
-
-          <button
-            onClick={handleLogout}
-            className="bg-orange-400 font-medium text-xl px-5 py-1.5 rounded-lg text-white hover:bg-orange-500"
-          >
-            Logout
-          </button>
-        </div>
+        
       </nav>
       
 
