@@ -15,12 +15,11 @@ function page() {
 
   function handleLogout() {
     localStorage.clear()
-    router.push("/")
+    router.push("/auth/Login")
   }
   
    useEffect(() => {
     if(user){
-    router.replace("/Dashboard/Home");
 
     const handlePopState = (e) => {
       router.replace("Dashboard/Home");
@@ -32,7 +31,7 @@ function page() {
       window.removeEventListener("popstate", handlePopState);
     };
     }
-  }, [router]);
+  }, [user, router]);
 
   return (
     <div>
