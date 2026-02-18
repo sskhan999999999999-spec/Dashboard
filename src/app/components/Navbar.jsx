@@ -12,6 +12,12 @@ function Navbar() {
   const user = UserStore.getState().user;
 
   const logout = UserStore.getState().logout;
+  const [mounted,setMounted] = useState(false)
+
+  useEffect(()=>{
+    setMounted(true)
+  },[])
+  if(!mounted) return null;
 
   function handleLogout() {
     logout();
@@ -65,8 +71,10 @@ function Navbar() {
 
         {/* Title */}
         <div className="font-bold text-2xl sm:text-3xl text-orange-400">
-          Dashboard
+          DASHBOARD
         </div>
+
+        
 
         {/* Desktop Links */}
         <div className="hidden sm:flex gap-10 items-center">

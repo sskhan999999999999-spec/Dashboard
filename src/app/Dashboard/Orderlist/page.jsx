@@ -16,7 +16,7 @@ function Orderlist() {
           <div
             key={index}
           >
-            <span>{order}</span>
+            <span>{order.text}</span>
             <button
               onClick={() => removeOrder(index)}
               className='p-1 pl-3 cursor-pointer text-[19px]'

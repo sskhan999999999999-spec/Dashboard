@@ -9,11 +9,11 @@ import { persist } from "zustand/middleware";
 
       setCreateOrder: (value) => set({ createOrder: value }),
 
-      addOrder: () =>
+      addOrder: (textOrder,typeOrder) =>
         set((state) => {
           if (!state.createOrder.trim()) return {};
           return{
-            orderList: [state.createOrder,...state.orderList],
+            orderList: [{text: textOrder,type:typeOrder},...state.orderList],
             createOrder: '',
           }
         }),

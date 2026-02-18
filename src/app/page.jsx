@@ -12,11 +12,13 @@ export default function Home() {
       
       const router = useRouter()
       
-          if(User){
+        if(User){
             router.replace("/Dashboard/Home")
           }else{
             router.replace("/auth/Login")
           }
+      
+          
        
     
        
