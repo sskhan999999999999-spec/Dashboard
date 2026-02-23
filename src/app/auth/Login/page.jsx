@@ -14,6 +14,7 @@ function Login() {
    
     const [showPassw,setShowPassw] = useState(false)
     const [formData,setFormData] = useState({
+        name:"",
         email:"",
         password:""
     }) 
@@ -38,12 +39,14 @@ function Login() {
             .find(
                 u =>
                 u.email === formData.email &&
-                u.password === formData.password
+                u.password === formData.password &&
+                u.name === formData.name
             );
             if(!foundUser){
             toast.error("You are not a member")
             return
          }
+         SignupUser(formData)
          router.replace("/Dashboard/Home")
     }
 
@@ -60,7 +63,7 @@ function Login() {
             <Toaster />
 
             <div className='shadow-2xl p-7 md:py-11 md:px-21 flex flex-col bg-[#FFFFFF] rounded-xl gap-2 justify-center'>
-                <h1 className='text-4xl tracking-wide text-orange-400 text-center font-bold'>
+                <h1 className='text-4xl tracking-wide text-blue-600 text-center font-bold'>
                     Dashboard
                 </h1>
                 <h3 className='text-2xl tracking-wide font-medium pb-3'>
@@ -70,6 +73,19 @@ function Login() {
                 <form 
                 onSubmit={handleSubmit} 
                 className='flex flex-col gap-2'>
+                    <div className='flex flex-col gap-2'>
+                        <label className='text-[14px] font-medium'>Name</label>
+                        <input
+                            type="text"
+                            value={formData?.name || ""}
+                            required
+                            onChange={handleChange}
+                            name='name'
+                            className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
+                            placeholder="Enter Your Name"
+                        />
+                    </div>
+
                    
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
@@ -105,7 +121,7 @@ function Login() {
 
                     <button
                         type="submit"
-                        className='bg-linear-to-r from-orange-400 to-orange-600 hover:bg-linear-to-r hover:from-orange-500 hover:to-orange-800 font-medium w-full p-2 cursor-pointer text-white rounded-lg'
+                        className='bg-linear-to-r from-blue-400 to-blue-600 hover:bg-linear-to-r hover:from-blue-500 hover:to-blue-800 font-medium w-full p-2 cursor-pointer text-white rounded-lg'
                     >
                         Sign in
                     </button>

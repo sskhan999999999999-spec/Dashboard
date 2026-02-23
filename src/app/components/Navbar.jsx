@@ -35,9 +35,10 @@ function Navbar() {
   
 
   return (
-    <div>
+    <div className="w-full min-w-347">
       <Toaster />
-      <nav className="bg-gray-100 p-4 w-full flex justify-between items-center fixed sm:sticky top-0 z-50 px-8">
+      <nav className="bg-gray-100 p-4 w-full flex justify-between items-center  top-0 z-50 px-8">
+       
         <button className="sm:hidden flex" onClick={() => setOpen(!open)}>
           <Menu />
         </button>
@@ -63,8 +64,7 @@ function Navbar() {
 
         
 
-        {/* Desktop Links */}
-        
+       
       </nav>
       
 

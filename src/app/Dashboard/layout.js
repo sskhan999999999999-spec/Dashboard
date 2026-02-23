@@ -1,21 +1,17 @@
+import { Sidebar } from "lucide-react";
 import Navbar from "../components/Navbar";
 import SideBar from "../components/Sidebar";
 
 export default function PageLayout({ children }) {
   return (
-    <div className="flex flex-col min-h-screen  w-full max-w-screen ">
-
-      <div className="shadow-sm z-10">
-        <Navbar />
+    <div className="flex w-full">
+      <div>
+        <SideBar/>
       </div>
-
-      <div className="h-full ">
-          <SideBar />
-        <main className=" w-full   ">
-          {children}
-        </main>
+      <div className="w-full bg-gray-100 p-8 px-10" >
+       
+        {children}
       </div>
-
     </div>
   );
 };

@@ -12,11 +12,15 @@ export const createUserStore = create(
         if (user) set({ currentUser: user });
       },
 
-      addUser: (user,role) => {
-        set({ users: [...get().users, user,role] });
+     addUser: (user, role) => {
+        const newUser = { ...user, role }; 
+        set({ users: [...get().users, newUser] });
       },
 
       logout: () => set({ currentUser: null }),
+      clearuser: ()=>{
+        set({users:[]})
+      }
     }),
     {
       name: "auth-storage",
