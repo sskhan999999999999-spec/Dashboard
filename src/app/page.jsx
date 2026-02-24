@@ -1,9 +1,23 @@
-import Image from "next/image";
+"use client"
+import { useRouter } from "next/navigation";
+import UserStore from "./store/Userstore";
+import { useEffect } from "react";
+
 
 export default function Home() {
-  return (
-    <div>
+      const user = UserStore.getState().user
+      const router = useRouter()
       
-    </div>
-  );
+        if(user){
+            router.replace("/Dashboard/Home")
+          }else{
+            router.replace("/auth/Login")
+          }
+   
+       return (
+        <div>
+         
+        </div>
+       )
+  
 }
