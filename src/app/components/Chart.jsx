@@ -1,19 +1,14 @@
 "use client"
 import React from "react";
+import { useOrderStore } from "../store/store";
 import {
   PieChart,
   Pie,
   Cell,
   Tooltip,
   ResponsiveContainer,
-  Legend
+  Legend,
 } from "recharts";
-import { useOrderStore } from "../store/store";
-
-
-
-
-
 
 const COLORS = ["#1d4ed8","#ef4444","#048c75"];
 

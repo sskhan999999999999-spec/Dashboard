@@ -12,11 +12,11 @@ function Toggle({ orderId }) {
       checked={orderId?.completed}
       onChange={()=>toggleOrder(orderId.id)}
       className={`${orderId?.completed ? "bg-blue-700" : "bg-gray-400"}
-      relative inline-flex h-6 w-10 items-center rounded-full transition-colors`}
+      relative inline-flex cursor-pointer h-5 w-8 items-center rounded-full transition-colors`}
     >
       <span
-        className={`${orderId?.completed ? "translate-x-5" : "translate-x-1"}
-        inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
+        className={`${orderId?.completed ? "translate-x-4" : "translate-x-1"}
+        inline-block h-3.5 w-3.5 transform rounded-full bg-white transition-transform`}
       />
     </Switch>
   )

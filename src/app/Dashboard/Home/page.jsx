@@ -28,7 +28,7 @@ function Page() {
   let name = "";
 
   if (user?.email === "super@gmail.com") {
-    name = "shahsawar";
+    name = "Shahsawar";
   } else {
     name = user?.name;
   }
@@ -44,8 +44,8 @@ function Page() {
   return (
     <div>
       <div className='flex justify-between items-center gap-3'>
-        <h1 className='text-blue-900 text-3xl font-semibold border-b-2 border-b-black/10 py-8 w-full'>
-          Welcome back {name}{" "}
+        <h1 className='text-blue-900 text-4xl font-semibold border-b-2 border-b-black/10 pt-1 py-8 w-full'>
+          Welcome back, {name}{" "}
         </h1>
         <div className='flex gap-4'>
           <div
@@ -72,7 +72,7 @@ function Page() {
           <div
             className='relative overflow-hidden 
             bg-linear-to-br from-red-600 via-red-500 to-orange-500 
-            shadow-xl p-6 w-55 rounded-2xl h-25 
+            shadow-xl p-8 w-55 rounded-2xl h-25 
             items-center justify-center text-white flex'
           >
             {/* Glow circles */}

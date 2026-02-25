@@ -64,7 +64,7 @@ function page() {
   return (
     <div>
       <div className='flex justify-between gap-2 items-center'>
-      <h1 className='text-blue-900 text-4xl w-full  font-bold border-b-2 border-b-black/10 py-4 '>User Form</h1>
+      <h1 className='text-blue-800 text-4xl w-full font-bold border-b-2 border-b-black/10 py-4 pt-1 '>User Form</h1>
       <div className='bg-blue-700 rounded-xl text-white p-2 px-4  w-40 '>
        <button className='flex gap-1'><Plus/> Add User</button> 
       </div>

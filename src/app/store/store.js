@@ -1,32 +1,32 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
- export const useOrderStore = create(
+export const useOrderStore = create(
   persist(
     (set) => ({
-      createOrder: '',
+      createOrder: "",
       orderList: [],
 
       setCreateOrder: (value) => set({ createOrder: value }),
 
-      addOrder: (textOrder,typeOrder) =>
+      addOrder: (textOrder, typeOrder) =>
         set((state) => {
           if (!state.createOrder.trim()) return {};
-          return{
-            orderList: [{text: textOrder,type:typeOrder,completed:false},...state.orderList],
-            createOrder: '',
-          }
+          return {
+            orderList: [
+              { text: textOrder, type: typeOrder, completed: false },
+              ...state.orderList,
+            ],
+            createOrder: "",
+          };
         }),
-        
-        toggleOrder:(id)=>set(
-          (state)=>({
-    orderList: state.orderList.map((order) =>
-      order.id === id
-        ? { ...order, completed: !order.completed }
-        : order
-    )
-  })),
-        
+
+      toggleOrder: (id) =>
+        set((state) => ({
+          orderList: state.orderList.map((order) =>
+            order.id === id ? { ...order, completed: !order.completed } : order,
+          ),
+        })),
 
       removeOrder: (index) =>
         set((state) => ({
@@ -35,12 +35,11 @@ import { persist } from "zustand/middleware";
 
       clearOrder: () => set({ orderList: [] }),
 
-      clearInput: () => set({ createOrder: ""}),
-
+      clearInput: () => set({ createOrder: "" }),
     }),
 
     {
       name: "order-list",
     },
-  )
+  ),
 );

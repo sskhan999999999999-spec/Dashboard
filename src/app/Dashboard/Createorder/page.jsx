@@ -28,7 +28,7 @@ function Createorder() {
 
   return (
     <div className=' h-full  p-4 sm:pb-20'>
-      <h1 className='md:text-center sm:text-end text-center sm:mr-14 text-blue-800 p-5 font-bold text-2xl sm:text-5xl'>
+      <h1 className='md:text-center sm:text-end text-center sm:mr-14 text-blue-800 p-5 font-bold text-4xl sm:text-5xl'>
         Create Order !
       </h1>
       <form
