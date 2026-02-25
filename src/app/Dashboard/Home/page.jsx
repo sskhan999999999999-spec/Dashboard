@@ -40,6 +40,7 @@ function Page() {
     .map((user) => user.role || "No Role"); // Agar role empty string "" hai to 'No Role' dikhayega
 
   console.log(roles);
+  console.log(user.email);
 
   return (
     <div>
@@ -90,11 +91,11 @@ function Page() {
         {/* Admin view */}
         {user?.email === "super@gmail.com" && (
           <div className=' mt-10 text-blue-900'>
-            <div className='flex flex-col text-2xl p-4  h-140 overflow-auto bg-white/90 w-3xl rounded-2xl hide-scrollbar shadow-xl'>
+            <div className='flex flex-col text-2xl p-4  px-6 h-140 overflow-auto bg-white/90 w-3xl rounded-2xl hide-scrollbar shadow-xl'>
               {users.map((u, index) => (
                 <div
                   key={index}
-                  className='flex justify-between items-center mt-4 border-b-2 border-b-blue-900/10'
+                  className='flex justify-between items-center mt-4 border-b-2 border-b-blue-900/10 bg-gray-200 p-2 rounded-xl hover:scale-105 duration-300 border border-gray-300 shadow-xl'
                 >
                   <p className='text-2xl'>{u.name}</p>
                   <p className='text-lg'>{u.email}</p>
@@ -118,18 +119,17 @@ function Page() {
 
         {/* Employee view */}
         {user?.email !== "super@gmail.com" && (
-          <div className='flex justify-center mt-10'>
-            <div className='flex flex-col text-2xl p-4 h-full max-h-100 overflow-y-auto bg-gray-300 w-full sm:max-w-2xl lg:max-w-5xl rounded-xl'>
+          <div className='flex justify-between mt-10'>
+            <div className='flex flex-col text-2xl p-4 h-full min-h-140 overflow-y-auto bg-gray-300 w-full min-w-3xl rounded-xl'>
               {orderList
-
-                .filter((o) => o.assignedTo === user?.name)
+                // .filter((o) => o.assignedTo === user?.name)
                 .map((order, idx) => (
                   <div
                     key={idx}
                     className='flex justify-between items-center mt-2'
                   >
-                    <p className='text-2xl max-w-sm'>{order.text}</p>
-                    <p className='text-lg max-w-sm '>
+                    <p className='text-2xl '>{order.text}</p>
+                    <p className='text-lg  '>
                       Assigned To:{" "}
                       <span className=' font-semibold'>{order.type}</span>
                     </p>
