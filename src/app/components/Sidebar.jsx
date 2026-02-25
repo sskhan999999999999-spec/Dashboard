@@ -97,8 +97,8 @@ function SideBar() {
           />
 
           <div className="">
-            <p className="font-medium">Shah Sawar</p>
-            <p className="text-sm text-white/70">Admin</p>
+            <p className="font-medium">Shahsawar</p>
+            <p className="text-sm text-white/70">Super Admin</p>
           </div>
         </div>
 
