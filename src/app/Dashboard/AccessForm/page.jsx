@@ -3,11 +3,12 @@ import SignupUser from '@/app/components/SignupUser'
 import { createUserStore } from '@/app/store/CreateUserStore'
 import UserStore from '@/app/store/Userstore'
 import { Eye, EyeOff, Plus } from 'lucide-react'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 
 
 function page() {
+     const inputref = useRef(null)
      const addUser = createUserStore.getState().addUser
      const clearUser = createUserStore.getState().clearuser
      const users = createUserStore.getState().users
@@ -56,7 +57,9 @@ function page() {
      console.log(users);
      
 
-    
+    function handleFocus(){
+      inputref.current.focus()
+    }
    
     
 
@@ -65,7 +68,7 @@ function page() {
     <div>
       <div className='flex justify-between gap-2 items-center'>
       <h1 className='text-blue-900 text-4xl w-full  font-bold border-b-2 border-b-black/10 py-4 '>User Form</h1>
-      <div className='bg-blue-700 rounded-xl text-white p-2 px-4  w-40 '>
+      <div className='bg-linear-to-r from-blue-600 via-indigo-500 to-cyan-500 rounded-xl text-white p-2 px-4  w-40 ' onClick={handleFocus}>
        <button className='flex gap-1'><Plus/> Add User</button> 
       </div>
       </div>
@@ -80,6 +83,7 @@ function page() {
         <label htmlFor="">Name <span className='text-blue-400'>*</span></label>
         <input type="text"
            value={userAccess.name}
+           ref={inputref}
            name='name' 
            onChange={handleChange}
            className=' w-full max-w-2xl p-2 rounded-lg outline-blue-400 border border-black/30'
@@ -107,7 +111,7 @@ function page() {
             className='w-full max-w-2xl p-2 rounded-lg outline-blue-400 border border-black/30'
             placeholder='Enter Password' />
           <span className='absolute   right-3 top-8' onClick={()=>setHidePass(!hidePass)}>
-          {hidePass ?<EyeOff/>:<Eye/> }
+         {userAccess.password .length > 0 && (hidePass ?<EyeOff/>:<Eye/> )}
           </span>
           
         </div>

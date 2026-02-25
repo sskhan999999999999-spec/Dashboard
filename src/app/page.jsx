@@ -7,17 +7,15 @@ import { useEffect } from "react";
 export default function Home() {
       const user = UserStore.getState().user
       const router = useRouter()
-      
+      useEffect(()=>{
         if(user){
             router.replace("/Dashboard/Home")
           }else{
             router.replace("/auth/Login")
           }
    
-       return (
-        <div>
-         
-        </div>
-       )
+      },[user,router])
+       
+       return null
   
 }
