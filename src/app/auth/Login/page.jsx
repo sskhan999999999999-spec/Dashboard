@@ -4,59 +4,59 @@ import { createUserStore } from '@/app/store/CreateUserStore';
 import UserStore from '@/app/store/Userstore';
 import { Eye, EyeOff } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import {  useEffect,useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Toaster, toast } from 'react-hot-toast';
 
 function Login() {
     const router = useRouter()
-    const user = UserStore(state=>state.user)
+    const user = UserStore(state => state.user)
     const usersData = createUserStore.getState().users
-   
-    const [showPassw,setShowPassw] = useState(false)
-    const [formData,setFormData] = useState({
-        name:"",
-        email:"",
-        password:""
-    }) 
-        
-    function handleChange(e){
-        const {name,value} = e.target
-        setFormData({...formData,[name]:value})
+
+    const [showPassw, setShowPassw] = useState(false)
+    const [formData, setFormData] = useState({
+        name: "",
+        email: "",
+        password: ""
+    })
+
+    function handleChange(e) {
+        const { name, value } = e.target
+        setFormData({ ...formData, [name]: value })
     }
     console.log(usersData);
-    
+
     function handleSubmit(e) {
         e.preventDefault();
 
-        if (formData.email === "super@gmail.com"){
-           router.replace("/Dashboard/Home")
-           SignupUser(formData)
-           return
+        if (formData.email === "super@gmail.com") {
+            router.replace("/Dashboard/Home")
+            SignupUser(formData)
+            return
         }
 
-         const foundUser = usersData
+        const foundUser = usersData
             .filter(u => u && u.email && u.password) // null aur empty remove
             .find(
                 u =>
-                u.email === formData.email &&
-                u.password === formData.password &&
-                u.name === formData.name
+                    u.email === formData.email &&
+                    u.password === formData.password &&
+                    u.name === formData.name
             );
-            if(!foundUser){
+        if (!foundUser) {
             toast.error("You are not a member")
             return
-         }
-         SignupUser(formData)
-         router.replace("/Dashboard/Home")
+        }
+        SignupUser(formData)
+        router.replace("/Dashboard/Home")
     }
 
-    useEffect(()=>{
-        if(user?.email && user?.password){
-          router.replace("/Dashboard/Home")
-        }else{
-          router.replace("/auth/Login")
+    useEffect(() => {
+        if (user?.email && user?.password) {
+            router.replace("/Dashboard/Home")
+        } else {
+            router.replace("/auth/Login")
         }
-      },[user])
+    }, [user])
 
     return (
         <div className='min-h-screen grid place-items-center bg-[#FFFFFF]'>
@@ -70,9 +70,9 @@ function Login() {
                     Sign In to your account !
                 </h3>
 
-                <form 
-                onSubmit={handleSubmit} 
-                className='flex flex-col gap-2'>
+                <form
+                    onSubmit={handleSubmit}
+                    className='flex flex-col gap-2'>
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Name</label>
                         <input
@@ -86,7 +86,7 @@ function Login() {
                         />
                     </div>
 
-                   
+
                     <div className='flex flex-col gap-2'>
                         <label className='text-[14px] font-medium'>Email</label>
                         <input
@@ -105,7 +105,7 @@ function Login() {
                         <input
                             type={showPassw ? "text" : "password"}
                             value={formData?.password || ""}
-                            onChange={handleChange}                            name='password'
+                            onChange={handleChange} name='password'
                             className='p-2 outline-1 outline-gray-300 rounded-lg px-2 placeholder:text-[14px] focus:bg-blue-50'
                             placeholder="Enter your password"
                         />

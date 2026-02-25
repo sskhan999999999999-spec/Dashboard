@@ -1,12 +1,14 @@
 "use client";
 import Toggle from "@/app/components/Toggle";
 import { useOrderStore } from "@/app/store/store";
+import UserStore from "@/app/store/Userstore";
 import { useRouter } from "next/navigation";
 import React from "react";
 
 function Orderlist() {
   const orderList = useOrderStore((s) => s.orderList);
   const removeOrder = useOrderStore((s) => s.removeOrder);
+  const user = UserStore((s) => s.user);
   const router = useRouter();
 
   return (
@@ -15,9 +17,11 @@ function Orderlist() {
         <h1 className=' text-blue-800 p-2 font-bold text-5xl'>
           Orders
         </h1>
-        <button
-          onClick={() => router.replace("/Dashboard/Createorder")}
-          className="bg-linear-to-r from-blue-700 py-2 text-xl px-7 text-gray-100 rounded-md cursor-pointer to-blue-800 hover:bg-linear-to-r hover:from-blue-800 hover:to-blue-900 font-medium"> Add Order</button>
+        {user?.email === "super@gmail.com" && (
+          <button
+            onClick={() => router.replace("/Dashboard/Createorder")}
+            className="bg-linear-to-r from-blue-600 via-indigo-500 to-cyan-500 py-2 text-xl px-7 text-gray-100 rounded-md cursor-pointer  font-medium"> Add Order</button>
+        )}
       </div>
 
       <div className='flex justify-center pt-7'>
