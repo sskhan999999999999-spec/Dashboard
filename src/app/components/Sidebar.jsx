@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import UserStore from "../store/Userstore";
-import { BoxIcon, Home, List, LockKeyholeIcon, Package } from "lucide-react";
+import { BoxIcon, Home, List, LockKeyholeIcon, Package, User2 } from "lucide-react";
 import { createUserStore } from "../store/CreateUserStore";
 import Image from "next/image";
 import img from "../../../public/shahsawar.jpeg";
@@ -90,15 +90,18 @@ function SideBar() {
 
       <div className="border-t border-white/20 pt-4 px-2">
         <div className="flex items-center gap-2 w-full">
-          <Image
+
+          {user?.email === "super@gmail.com" ? 
+            <Image
             src={img}
             alt="img"
             className="object-cover h-16 w-16 rounded-full"
-          />
+          /> : <User2 size={30} />
+          }
 
           <div className="">
-            <p className="font-medium">Shahsawar</p>
-            <p className="text-sm text-white/70">Super Admin</p>
+            <p className="font-medium">{user?.email === "super@gmail.com" ? "Shahsawar" : user?.name}</p>
+            <p className="text-sm text-white/70">{user?.email === "super@gmail.com" ? "Super Admin" : "User"}</p>
           </div>
         </div>
 
